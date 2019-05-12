@@ -1,7 +1,9 @@
 const User = require("../models/user.model");
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
-exports.get_all_users = (req, res, next) => {
+exports.get_all_users = (req, res) => {
   User.find()
     .select("-__v")
     .populate("roles", "_id name")
@@ -21,7 +23,7 @@ exports.get_all_users = (req, res, next) => {
     });
 };
 
-exports.create_user = (req, res, next) => {
+exports.create_user = (req, res) => {
   const user = new User({
     _id: new mongoose.Types.ObjectId(),
     names: req.body.names,
@@ -50,7 +52,7 @@ exports.create_user = (req, res, next) => {
     });
 };
 
-exports.get_user = (req, res, next) => {
+exports.get_user = (req, res) => {
   const id = req.params.userId;
   User.findById(id)
     .populate("roles", "_id name")
@@ -71,7 +73,7 @@ exports.get_user = (req, res, next) => {
     });
 };
 
-exports.update_user = (req, res, next) => {
+exports.update_user = (req, res) => {
   const id = req.params.userId;
 
   const updateProps = {};
@@ -96,7 +98,7 @@ exports.update_user = (req, res, next) => {
     });
 };
 
-exports.delete_user = (req, res, next) => {
+exports.delete_user = (req, res) => {
   const id = req.params.userId;
   User.remove({ _id: id })
     .exec()
