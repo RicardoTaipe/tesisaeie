@@ -9,13 +9,13 @@ exports.login = (req, res) => {
     .then(user => {
       if (user.length < 1) {
         return res.status(404).json({
-          message: "Login failed"
+          message: "Login fallo"
         });
       }
       bcrypt.compare(req.body.password, user[0].password, (err, result) => {
         if (err) {
           return res.status(401).json({
-            message: "Auth failed"
+            message: "Autenticacion fallida"
           });
         }
         if (result) {
@@ -31,11 +31,12 @@ exports.login = (req, res) => {
           );
           return res.status(200).json({
             message: "Auth succesful",
-            token: token
+            token: token,
+            uid: user[0]._id
           });
         }
         return res.status(401).json({
-          message: "Auth failed"
+          message: "Autenticacion fallida"
         });
       });
     })

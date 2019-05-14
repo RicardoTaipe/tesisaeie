@@ -1,0 +1,116 @@
+<!--Navbar-->
+<mat-toolbar color="primary">
+  <span id="title-aeie">AEIE</span>
+  <!-- This fills the remaining space of the current row -->
+  <span class="example-fill-remaining-space"></span>
+  <mat-icon>account_circle</mat-icon>
+  <span>
+    <button mat-button [matMenuTriggerFor]="menu">Username</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="auth.logoutUser()">Salir</button>
+    </mat-menu>
+  </span>
+</mat-toolbar>
+
+<!-- Side navigation -->
+<div class="sidenav">
+  <mat-accordion>
+    <mat-expansion-panel [hideToggle]="true" routerLink="/dashboard">
+      <mat-expansion-panel-header>
+        <mat-icon>home</mat-icon>HOME
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-icon>store_mall_directory</mat-icon>CATALAGO
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <a
+          mat-list-item
+          [routerLink]="['/dashboard/category']"
+          routerLinkActive="active"
+          >Categorias</a
+        >
+        <a
+          mat-list-item
+          [routerLink]="['/dashboard/product']"
+          routerLinkActive="active"
+          >Producto</a
+        >
+        <a
+          mat-list-item
+          [routerLink]="['/dashboard/supplier']"
+          routerLinkActive="active"
+          >Proveedor</a
+        >
+      </mat-nav-list>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-icon>shopping_basket</mat-icon>VENTAS
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <a mat-list-item routerLink="/venta" routerLinkActive="active"
+          >Registrar Venta</a
+        >
+        <a mat-list-item routerLink="/ventas-totales">Todas la ventas</a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-icon>business</mat-icon>SERVICIOS
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <a mat-list-item routerLink="/curso">Registrar Aportante</a>
+        <a mat-list-item routerLink="/curso">Registrar Aporte</a>
+        <a mat-list-item routerLink="/casillero">Casillero</a>
+        <a mat-list-item routerLink="/registro-casillero"
+          >Registro de Estudiantes</a
+        >
+        <a mat-list-item routerLink="/casillero">Notificacion correo</a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-icon>assignment</mat-icon>CURSOS
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <a mat-list-item routerLink="/curso">Registrar Curso</a>
+
+        <a mat-list-item routerLink="/registro-curso"
+          >Registro de Estudiantes</a
+        >
+      </mat-nav-list>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-icon>event</mat-icon>INFORMATIVO
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <a mat-list-item routerLink="/informativo">Publicar</a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-icon>account_circle</mat-icon>USUARIOS
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <a mat-list-item routerLink="/roles" matTooltip="Info about the action"
+          >Listar Usuarios</a
+        >
+        <a mat-list-item routerLink="/permisos">Roles</a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<!-- Page content -->
+<div class="main">
+  <router-outlet></router-outlet>
+</div>

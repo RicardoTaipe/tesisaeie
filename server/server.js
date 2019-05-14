@@ -6,6 +6,7 @@ const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv").config();
+const path = require("path");
 require("./database");
 
 //Settings Express app
@@ -17,7 +18,7 @@ app.set("port", process.env.PORT || 3000);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
-
+app.use(express.static(path.join(__dirname, "dist/client")));
 //Routes
 const userRoutes = require("./src/routes/user.route");
 const roleRoutes = require("./src/routes/role.route");
@@ -38,8 +39,8 @@ app.use("/api/ads", adsRoutes);
 app.use("/api/supplier", supplierRoutes);
 app.use("/api/sale", saleRoutes);
 
-app.get("/", (req, res) => {
-  res.json("hallo");
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist/client/index.html"));
 });
 
 // listen for requests :)
