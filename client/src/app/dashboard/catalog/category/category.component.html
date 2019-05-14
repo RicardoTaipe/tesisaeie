@@ -1,3 +1,117 @@
-<p>
-  category works!
-</p>
+<div class="category-container">
+  <mat-tab-group #tabs mat-align-tabs="start">
+    <!-- categorias registrados-->
+    <mat-tab label="Categorias Registradas">
+      <mat-form-field>
+        <input
+          matInput
+          (keyup)="applyFilter($event.target.value)"
+          placeholder="Buscar"
+        />
+      </mat-form-field>
+
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+          </ng-container>
+
+          <!-- descripcion Column -->
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef>Description</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.description }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef>Update</th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                mat-icon-button
+                color="accent"
+                (click)="updateCategory(element)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef>Delete</th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="deleteCategory(element._id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 20]"
+          showFirstLastButtons
+        ></mat-paginator>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Registrar Categoria">
+      <form
+        #categoryForm="ngForm"
+        autocomplete="off"
+        (ngSubmit)="saveCategory(categoryForm)"
+      >
+        <input
+          type="hidden"
+          name="_id"
+          #_id="ngModel"
+          [(ngModel)]="category._id"
+        />
+        <div class="example-container">
+          <mat-form-field [hideRequiredMarker]="true">
+            <input
+              matInput
+              placeholder="Nombre"
+              name="name"
+              [(ngModel)]="category.name"
+              #name="ngModel"
+              required
+            />
+            {{ name.touched }}
+            {{ name.invalid }}
+            {{ name.pristine }}
+            {{ name.dirty }}
+            <mat-error *ngIf="name.invalid && name.touched"
+              >Campo requerido</mat-error
+            >
+            <mat-error *ngIf="name.invalid && name.pristine"
+              >Campo requerido</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field>
+            <textarea
+              matInput
+              placeholder="Descripcion"
+              name="description"
+              [(ngModel)]="category.description"
+              #description="ngModel"
+            ></textarea>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" type="submit">
+            Guardar
+          </button>
+        </div>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
+</div>

@@ -6,14 +6,9 @@ exports.get_all_categories = (req, res, next) => {
     .select("_id name description")
     .exec()
     .then(docs => {
-      const response = {
-        count: docs.length,
-        categories: docs
-      };
-      res.status(200).json(response);
+      res.status(200).json(docs);
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
@@ -29,16 +24,14 @@ exports.create_category = (req, res, next) => {
   category
     .save()
     .then(result => {
-      console.log(result);
       res.status(201).json({
-        message: "Created category succesfully",
-        createdCategory: {
+        message: "Created category succesfully"
+        /*createdCategory: {
           result
-        }
+        }*/
       });
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
@@ -51,7 +44,6 @@ exports.get_category = (req, res, next) => {
     .select("_id name description")
     .exec()
     .then(doc => {
-      console.log(doc);
       if (doc) {
         res.status(200).json(doc);
       } else {
@@ -61,7 +53,6 @@ exports.get_category = (req, res, next) => {
       }
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({ error: err });
     });
 };
@@ -77,13 +68,11 @@ exports.update_category = (req, res, next) => {
   Category.updateOne({ _id: id }, { $set: updateProps })
     .exec()
     .then(result => {
-      console.log(result);
       res.status(200).json({
         message: "Category updated"
       });
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
@@ -100,7 +89,6 @@ exports.delete_category = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });

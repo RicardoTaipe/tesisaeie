@@ -111,7 +111,6 @@ exports.get_user = (req, res) => {
     .populate("roles", "_id name")
     .exec()
     .then(doc => {
-      console.log(doc);
       if (doc) {
         res.status(200).json(doc);
       } else {
@@ -121,7 +120,6 @@ exports.get_user = (req, res) => {
       }
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({ error: err });
     });
 };

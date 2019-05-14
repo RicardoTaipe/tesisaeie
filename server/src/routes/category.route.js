@@ -10,7 +10,7 @@ router.post("/", CategoryController.create_category);
 //Show a category by Id
 router.get("/:categoryId", CategoryController.get_category);
 //Update a category by Id
-router.patch("/:categoryId", CategoryController.update_category);
+router.put("/:categoryId", CategoryController.update_category);
 //Delete a category by Id
 router.delete("/:categoryId", CategoryController.delete_category);
 

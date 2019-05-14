@@ -11,6 +11,11 @@ export class AuthService {
 
   constructor(private http: HttpClient, private _router: Router) {}
 
+  getUserName(){
+    const idUser = localStorage.getItem("uid");
+    return this.http.get(this.URL_API+"/"+idUser)    
+  }
+
   loginUser(user: User) {
     return this.http.post<any>(this.URL_API + "/login", user);
   }

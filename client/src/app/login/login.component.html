@@ -25,10 +25,10 @@
             *ngIf="email.invalid && (email.dirty || email.touched)"
           >
             <mat-error *ngIf="email.errors.required"
-              >This field is required</mat-error
+              > Campo requerido</mat-error
             >
             <mat-error *ngIf="email.errors.pattern"
-              >Type a right email</mat-error
+              >Ingrese un email valido</mat-error
             >
           </div>
         </mat-form-field>
@@ -47,7 +47,7 @@
           />
           <mat-icon matSuffix>lock</mat-icon>
           <mat-error *ngIf="password.invalid && password.touched"
-            >This field is required</mat-error
+            >Campo requerido</mat-error
           >
         </mat-form-field>
       </div>
