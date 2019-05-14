@@ -13,9 +13,12 @@ import { AuthService } from "./services/auth.service";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { AuthGuard } from "./services/auth.guard";
 import { TokenInterceptorService } from "./services/token-interceptor.service";
+import { CategoryComponent } from './dashboard/catalog/category/category.component';
+import { ProductComponent } from './dashboard/catalog/product/product.component';
+import { SupplierComponent } from './dashboard/catalog/supplier/supplier.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, DashboardComponent],
+  declarations: [AppComponent, LoginComponent, DashboardComponent, CategoryComponent, ProductComponent, SupplierComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
