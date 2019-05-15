@@ -3,16 +3,12 @@ const mongoose = require("mongoose");
 
 exports.get_all_products = (req, res, next) => {
   Product.find()
-    .select("_id name description")
+    .select("_id name description price stock")
     .populate("category", "_id name description")
     .populate("supplier", "_id name")
     .exec()
     .then(docs => {
-      const response = {
-        count: docs.length,
-        products: docs
-      };
-      res.status(200).json(response);
+      res.status(200).json(docs);
     })
     .catch(err => {
       console.log(err);
@@ -100,7 +96,7 @@ exports.update_product = (req, res, next) => {
 
 exports.delete_product = (req, res, next) => {
   const id = req.params.productId;
-  Product.remove({ _id: id })
+  Product.deleteOne({ _id: id })
     .exec()
     .then(result => {
       res.status(200).json({

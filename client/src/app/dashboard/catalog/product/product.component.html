@@ -1,3 +1,205 @@
-<p>
-  product works!
-</p>
+<div class="category-container">
+  <mat-tab-group #tabs mat-align-tabs="start">
+    <!-- productos registrados-->
+    <mat-tab label="Productos Registrados">
+      <mat-form-field>
+        <input
+          matInput
+          (keyup)="applyFilter($event.target.value)"
+          placeholder="Buscar"
+        />
+      </mat-form-field>
+
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+          </ng-container>
+
+          <!-- descripcion Column -->
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef>Description</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.description }}
+            </td>
+          </ng-container>
+
+          <!-- price Column -->
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef>Price</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.price | currency }}
+            </td>
+          </ng-container>
+
+          <!-- stock Column -->
+          <ng-container matColumnDef="stock">
+            <th mat-header-cell *matHeaderCellDef>Stock</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.stock }}
+            </td>
+          </ng-container>
+
+          <!-- catgory Column -->
+          <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef>Category</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.category.name }}
+            </td>
+          </ng-container>
+          <!-- supplier Column -->
+          <ng-container matColumnDef="supplier">
+            <th mat-header-cell *matHeaderCellDef>Supplier</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.supplier.name }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef>Update</th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                mat-icon-button
+                color="accent"
+                (click)="updateProduct(element)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef>Delete</th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="deleteProduct(element._id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <mat-paginator
+          [pageSizeOptions]="[5, 10]"
+          showFirstLastButtons
+        ></mat-paginator>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Registrar Producto">
+      <form
+        #productForm="ngForm"
+        autocomplete="off"
+        (ngSubmit)="saveProduct(productForm)"
+      >
+        <input
+          type="hidden"
+          name="_id"
+          #_id="ngModel"
+          [(ngModel)]="product._id"
+        />
+        <div class="example-container">
+          <mat-form-field [hideRequiredMarker]="true">
+            <input
+              matInput
+              placeholder="Nombre"
+              name="name"
+              [(ngModel)]="product.name"
+              #name="ngModel"
+              required
+            />
+            <mat-error [hidden]="name.valid || name.pristine"
+              >Campo requerido</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field [hideRequiredMarker]="true">
+            <input
+              matInput
+              placeholder="Descripcion"
+              name="description"
+              [(ngModel)]="product.description"
+              #description="ngModel"
+              required
+            />
+          </mat-form-field>
+
+          <mat-form-field [hideRequiredMarker]="true">
+            <input
+              matInput
+              placeholder="Precio"
+              name="price"
+              [(ngModel)]="product.price"
+              #price="ngModel"
+              type="number"
+              required
+            />
+            <mat-error [hidden]="price.valid || price.pristine"
+              >Campo requerido</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field [hideRequiredMarker]="true">
+            <input
+              matInput
+              placeholder="Stock"
+              name="stock"
+              [(ngModel)]="product.stock"
+              #stock="ngModel"
+              type="number"
+              required
+            />
+            <mat-error [hidden]="price.valid || price.pristine"
+              >Campo requerido</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Categorias</mat-label>
+            <mat-select>
+              <mat-option
+                *ngFor="let category of categories"
+                [value]="category"
+              >
+                {{ category.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Proveedor</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let supplier of suppliers" [value]="supplier">
+                {{ supplier.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div>
+            <button mat-raised-button color="primary" type="submit">
+              <mat-icon>save</mat-icon>
+              Guardar
+            </button>
+
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="resetForm(supplierForm)"
+            >
+              <mat-icon>cancel</mat-icon>
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
+</div>

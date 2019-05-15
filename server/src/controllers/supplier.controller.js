@@ -6,11 +6,7 @@ exports.get_all_suppliers = (req, res, next) => {
     .select("_id name phone")
     .exec()
     .then(docs => {
-      const response = {
-        count: docs.length,
-        suppliers: docs
-      };
-      res.status(200).json(response);
+      res.status(200).json(docs);
     })
     .catch(err => {
       console.log(err);
@@ -30,14 +26,10 @@ exports.create_supplier = (req, res, next) => {
     .save()
     .then(result => {
       res.status(201).json({
-        message: "Created supplier succesfully",
-        createdSupplier: {
-          result
-        }
+        message: "Created supplier succesfully"
       });
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
@@ -50,7 +42,6 @@ exports.get_supplier = (req, res, next) => {
     .select("_id name phone ")
     .exec()
     .then(doc => {
-      console.log(doc);
       if (doc) {
         res.status(200).json(doc);
       } else {
@@ -60,7 +51,6 @@ exports.get_supplier = (req, res, next) => {
       }
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({ error: err });
     });
 };
@@ -77,13 +67,11 @@ exports.update_supplier = (req, res, next) => {
   Supplier.updateOne({ _id: id }, { $set: updateProps })
     .exec()
     .then(result => {
-      console.log(result);
       res.status(200).json({
         message: "Supplier updated"
       });
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
@@ -92,7 +80,7 @@ exports.update_supplier = (req, res, next) => {
 
 exports.delete_supplier = (req, res, next) => {
   const id = req.params.supplierId;
-  Supplier.remove({ _id: id })
+  Supplier.deleteOne({ _id: id })
     .exec()
     .then(result => {
       res.status(200).json({
@@ -100,7 +88,6 @@ exports.delete_supplier = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });

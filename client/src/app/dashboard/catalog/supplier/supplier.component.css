@@ -1,0 +1,39 @@
+.example-container {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.example-container > * {
+  width: 80%;
+}
+
+.mat-tab-group {
+  margin-bottom: 48px;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+td {
+  padding-right: 8px;
+}
+
+button {
+  width: 20% !important;
+  align-self: flex-start;
+  margin-right: 20px;
+}
+
+table {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-width: 300px;
+}
+
+th.mat-header-cell {
+  text-align: left;
+  max-width: 300px;
+}

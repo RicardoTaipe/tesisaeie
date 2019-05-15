@@ -11,7 +11,7 @@ router.post("/", SupplierController.create_supplier);
 //Show a supplier by Id
 router.get("/:supplierId", SupplierController.get_supplier);
 //Update a supplier by Id
-router.patch("/:supplierId", SupplierController.update_supplier);
+router.put("/:supplierId", SupplierController.update_supplier);
 //Delete a supplier by Id
 router.delete("/:supplierId", SupplierController.delete_supplier);
 
