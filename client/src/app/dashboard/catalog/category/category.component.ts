@@ -33,22 +33,24 @@ export class CategoryComponent implements OnInit {
   }
 
   saveCategory(categoryForm: NgForm) {
-    if (categoryForm.value._id == null) {
-      this.categoryService.addCategory(categoryForm.value).subscribe(data => {
-        this.getCategories();
-        this.showMessage(data);
-        this.resetForm(categoryForm);
-        this.tabGroup.selectedIndex = this.CATEGORIAS_REGISTRADAS;
-      });
-    } else {
-      this.categoryService
-        .updateCategory(categoryForm.value._id, categoryForm.value)
-        .subscribe(data => {
-          this.showMessage(data);
+    if (categoryForm.form.valid) {
+      if (categoryForm.value._id == null) {
+        this.categoryService.addCategory(categoryForm.value).subscribe(data => {
           this.getCategories();
+          this.showMessage(data);
           this.resetForm(categoryForm);
           this.tabGroup.selectedIndex = this.CATEGORIAS_REGISTRADAS;
         });
+      } else {
+        this.categoryService
+          .updateCategory(categoryForm.value._id, categoryForm.value)
+          .subscribe(data => {
+            this.showMessage(data);
+            this.getCategories();
+            this.resetForm(categoryForm);
+            this.tabGroup.selectedIndex = this.CATEGORIAS_REGISTRADAS;
+          });
+      }
     }
   }
 
@@ -65,7 +67,7 @@ export class CategoryComponent implements OnInit {
   }
 
   updateCategory(categorySelected: Category) {
-    this.category = Object.assign({},categorySelected) ;
+    this.category = Object.assign({}, categorySelected);
     this.tabGroup.selectedIndex = this.REGISTRAR_CATEGORIA;
   }
   deleteCategory(_id: string) {

@@ -23,6 +23,7 @@ td {
 button {
   width: 20% !important;
   align-self: flex-start;
+  margin-right: 20px;
 }
 
 table {

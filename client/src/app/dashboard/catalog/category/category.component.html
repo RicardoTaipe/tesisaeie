@@ -85,14 +85,13 @@
               #name="ngModel"
               required
             />
-            {{ name.touched }}
+            {{ name.valid }}
             {{ name.invalid }}
+            {{ name.touched }}
+            {{ name.untouched }}
             {{ name.pristine }}
             {{ name.dirty }}
-            <mat-error *ngIf="name.invalid && name.touched"
-              >Campo requerido</mat-error
-            >
-            <mat-error *ngIf="name.invalid && name.pristine"
+            <mat-error [hidden]="name.valid || name.pristine"
               >Campo requerido</mat-error
             >
           </mat-form-field>
@@ -106,10 +105,21 @@
               #description="ngModel"
             ></textarea>
           </mat-form-field>
+          <div>
+            <button mat-raised-button color="primary" type="submit">
+              <mat-icon>save</mat-icon>
+              Guardar
+            </button>
 
-          <button mat-raised-button color="primary" type="submit">
-            Guardar
-          </button>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="resetForm(categoryForm)"
+            >
+              <mat-icon>cancel</mat-icon>
+              Cancelar
+            </button>
+          </div>
         </div>
       </form>
     </mat-tab>
