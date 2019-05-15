@@ -85,12 +85,6 @@
               #name="ngModel"
               required
             />
-            {{ name.valid }}
-            {{ name.invalid }}
-            {{ name.touched }}
-            {{ name.untouched }}
-            {{ name.pristine }}
-            {{ name.dirty }}
             <mat-error [hidden]="name.valid || name.pristine"
               >Campo requerido</mat-error
             >
