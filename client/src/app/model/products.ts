@@ -12,5 +12,7 @@ export class Product {
 
   constructor() {
     this._id = null;
+    this.category = new Category();
+    this.supplier = new Supplier();
   }
 }

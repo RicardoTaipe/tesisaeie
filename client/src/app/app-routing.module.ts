@@ -14,9 +14,15 @@ const routes: Routes = [
     component: DashboardComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: "category", component: CategoryComponent },
-      { path: "product", component: ProductComponent },
-      { path: "supplier", component: SupplierComponent }
+      {
+        path: "",
+        canActivateChild: [AuthGuard],
+        children: [
+          { path: "category", component: CategoryComponent },
+          { path: "product", component: ProductComponent },
+          { path: "supplier", component: SupplierComponent }
+        ]
+      }
     ]
   },
   { path: "**", redirectTo: "/login", pathMatch: "full" }

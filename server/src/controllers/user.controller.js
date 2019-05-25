@@ -24,10 +24,11 @@ exports.login = (req, res) => {
               email: user[0].email,
               userId: user[0]._id
             },
-            process.env.JWT_KEY,
+            process.env
+              .JWT_KEY /*,
             {
               expiresIn: "1h"
-            }
+            }*/
           );
           return res.status(200).json({
             message: "Auth succesful",
@@ -164,4 +165,19 @@ exports.delete_user = (req, res) => {
         error: err
       });
     });
+};
+
+exports.verify_token = (req, res) => {
+  const token = req.body.token;
+  if (token != "") {
+    jwt.verify(token, process.env.JWT_KEY, (error, decoded) => {
+      if (error) {
+        return res.status(404).json(error);
+      }
+      return res.status(200).json("ok");
+    });
+  }
+  return res.status(401).json({
+    message: "Auth failed"
+  });
 };

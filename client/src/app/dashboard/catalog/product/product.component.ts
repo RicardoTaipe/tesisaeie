@@ -3,7 +3,9 @@ import {
   MatTabGroup,
   MatPaginator,
   MatTableDataSource,
-  MatSnackBar
+  MatSnackBar,
+  MatSelect,
+  MatOption
 } from "@angular/material";
 import { Product } from "src/app/model/products";
 import { ProductService } from "src/app/services/product.service";
@@ -19,6 +21,8 @@ import { SupplierService } from "src/app/services/supplier.service";
   styleUrls: ["./product.component.css"]
 })
 export class ProductComponent implements OnInit {
+  @ViewChild("supplier") selectSupplier: MatSelect;
+  @ViewChild("category") selectCategory: MatSelect;
   @ViewChild("tabs") tabGroup: MatTabGroup;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   readonly PRODUCT_REGISTERED = 0;
@@ -37,7 +41,7 @@ export class ProductComponent implements OnInit {
     "delete"
   ];
   dataSource = new MatTableDataSource<Product>();
-
+  option: MatOption;
   constructor(
     private productService: ProductService,
     private snackBar: MatSnackBar,
@@ -79,7 +83,6 @@ export class ProductComponent implements OnInit {
 
   getProducts() {
     this.productService.getProducts().subscribe(res => {
-      console.log(res);
       this.dataSource.data = res;
       this.dataSource.paginator = this.paginator;
       this.tabGroup.selectedIndex = this.PRODUCT_REGISTERED;
@@ -88,7 +91,17 @@ export class ProductComponent implements OnInit {
 
   updateProduct(productSelected: Product) {
     this.product = Object.assign({}, productSelected);
+
     this.tabGroup.selectedIndex = this.REGISTRAR_PRODUCT;
+    //this.select.value = productSelected.supplier;
+    setTimeout(() => {
+      this.selectSupplier.options
+        .find(e => e.value._id === productSelected.supplier._id)
+        .select();
+      this.selectCategory.options
+        .find(e => e.value._id === productSelected.category._id)
+        .select();
+    }, 500);
   }
 
   deleteProduct(_id: string) {

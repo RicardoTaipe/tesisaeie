@@ -99,9 +99,19 @@ THE SOFTWARE.
 
 @angular/material/menu
 
+@angular/material/paginator
+
+@angular/material/select
+
 @angular/material/snack-bar
 
+@angular/material/table
+
+@angular/material/tabs
+
 @angular/material/toolbar
+
+@angular/material/tooltip
 
 @angular/platform-browser
 MIT

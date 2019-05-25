@@ -20,7 +20,7 @@ export class CategoryComponent implements OnInit {
   readonly CATEGORIAS_REGISTRADAS = 0;
   readonly REGISTRAR_CATEGORIA = 1;
   category: Category = new Category();
-  displayedColumns: string[] = ["name", "description", "update", "delete"];
+  displayedColumns: string[] = ["Nombre", "Descripcion", "Actualizar", "Eliminar"];
   dataSource = new MatTableDataSource<Category>();
 
   constructor(

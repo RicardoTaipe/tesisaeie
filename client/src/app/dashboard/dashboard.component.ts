@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../services/auth.service";
 import { Router } from "@angular/router";
+import { User } from '../model/user';
 
 @Component({
   selector: "app-dashboard",
@@ -8,7 +9,7 @@ import { Router } from "@angular/router";
   styleUrls: ["./dashboard.component.css"]
 })
 export class DashboardComponent implements OnInit {
-  user = {};
+  user: User;
 
   constructor(public auth: AuthService, private router: Router) {}
 
@@ -18,7 +19,7 @@ export class DashboardComponent implements OnInit {
 
   getUsername(){
     this.auth.getUserName().subscribe(res => {
-      this.user = res
+      this.user = res as User
     }, error => {
       console.log(error)
     });
