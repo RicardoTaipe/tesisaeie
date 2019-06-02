@@ -16,6 +16,7 @@ import { TokenInterceptorService } from "./services/token-interceptor.service";
 import { CategoryComponent } from "./dashboard/catalog/category/category.component";
 import { ProductComponent } from "./dashboard/catalog/product/product.component";
 import { SupplierComponent } from "./dashboard/catalog/supplier/supplier.component";
+import { UserComponent } from './dashboard/users/user/user.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SupplierComponent } from "./dashboard/catalog/supplier/supplier.compone
     DashboardComponent,
     CategoryComponent,
     ProductComponent,
-    SupplierComponent
+    SupplierComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

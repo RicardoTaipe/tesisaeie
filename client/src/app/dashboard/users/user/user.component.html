@@ -1,0 +1,223 @@
+<div class="category-container">
+  <mat-tab-group #tabs mat-align-tabs="start">
+    <!-- usuarios registrados-->
+    <mat-tab label="Usuarios Registrados">
+      <mat-form-field>
+        <input
+          matInput
+          (keyup)="applyFilter($event.target.value)"
+          placeholder="Buscar"
+        />
+      </mat-form-field>
+
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+          <!-- Name Column -->
+          <ng-container matColumnDef="names">
+            <th mat-header-cell *matHeaderCellDef>Nombres</th>
+            <td mat-cell *matCellDef="let element">{{ element.names }}</td>
+          </ng-container>
+
+          <!-- descripcion Column -->
+          <ng-container matColumnDef="lastnames">
+            <th mat-header-cell *matHeaderCellDef>Apellidos</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.lastnames }}
+            </td>
+          </ng-container>
+
+          <!-- username Column -->
+          <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef>Nombre de usuario</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.username }}
+            </td>
+          </ng-container>
+
+          <!-- email Column -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>Correo</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.email }}
+            </td>
+          </ng-container>
+
+          <!-- phone Column -->
+          <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef>Telefono</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.phone }}
+            </td>
+          </ng-container>
+
+          <!-- admin Column-->
+          <ng-container matColumnDef="admin">
+            <th mat-header-cell *matHeaderCellDef>Admin</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-checkbox
+                [disabled]="true"
+                [checked]="element.isAdmin"
+              ></mat-checkbox>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef>Actualizar</th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                mat-icon-button
+                color="accent"
+                (click)="updateUser(element)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="deleteUser(element._id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <mat-paginator
+          [pageSizeOptions]="[5, 10]"
+          showFirstLastButtons
+        ></mat-paginator>
+      </div>
+    </mat-tab>
+    <!--Registrar usuarios-->
+    <mat-tab label="Registrar Usuario">
+      <form
+        #userForm="ngForm"
+        autocomplete="off"
+        (ngSubmit)="saveUser(userForm)"
+      >
+        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="user._id" />
+        <div class="example-container">
+          <mat-form-field [hideRequiredMarker]="true">
+            <input
+              matInput
+              placeholder="Nombres"
+              name="names"
+              [(ngModel)]="user.names"
+              #names="ngModel"
+              required
+            />
+            <mat-error [hidden]="names.valid || names.pristine"
+              >Campo requerido</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field [hideRequiredMarker]="true">
+            <input
+              matInput
+              placeholder="Apellidos"
+              name="lastnames"
+              [(ngModel)]="user.lastnames"
+              #lastnames="ngModel"
+              required
+            />
+            <mat-error [hidden]="lastnames.valid || lastnames.pristine"
+              >Campo requerido</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field [hideRequiredMarker]="true">
+            <input
+              matInput
+              placeholder="Nombre de usuario"
+              name="username"
+              [(ngModel)]="user.username"
+              #username="ngModel"
+              required
+            />
+            <mat-error [hidden]="username.valid || username.pristine"
+              >Campo requerido</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field [hideRequiredMarker]="true">
+            <input
+              matInput
+              placeholder="Email"
+              name="email"
+              [(ngModel)]="user.email"
+              #email="ngModel"
+              required
+              type="email"
+            />
+            <mat-error [hidden]="email.valid || email.pristine"
+              >Campo requerido</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field [hideRequiredMarker]="true">
+            <input
+              matInput
+              placeholder="Contraseña"
+              name="password"
+              [(ngModel)]="user.password"
+              #password="ngModel"
+              type="password"
+              required
+            />
+            <mat-error [hidden]="password.valid || password.pristine"
+              >Campo requerido</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field [hideRequiredMarker]="true">
+            <input
+              matInput
+              placeholder="Telefono"
+              name="phone"
+              [(ngModel)]="user.phone"
+              #phone="ngModel"
+              type="number"
+              required
+            />
+            <mat-error [hidden]="phone.valid || phone.pristine"
+              >Campo requerido</mat-error
+            >
+          </mat-form-field>
+
+          <div class="check">
+            <label>isAdmin</label>
+            <mat-checkbox
+              name="isAdmin"
+              [(ngModel)]="user.isAdmin"
+            ></mat-checkbox>
+          </div>
+
+          <div>
+            <button mat-raised-button color="primary" type="submit">
+              <mat-icon>save</mat-icon>
+              Guardar
+            </button>
+
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="resetForm(userForm)"
+            >
+              <mat-icon>cancel</mat-icon>
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
+</div>

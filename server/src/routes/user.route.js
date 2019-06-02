@@ -10,7 +10,7 @@ router.post("/",auth, UsersController.create_user);
 //Show a product by Id
 router.get("/:userId",auth, UsersController.get_user);
 //Update a product by Id
-router.patch("/:userId",auth, UsersController.update_user);
+router.put("/:userId",auth, UsersController.update_user);
 //Delete a product by Id
 router.delete("/:userId",auth, UsersController.delete_user);
 //login user

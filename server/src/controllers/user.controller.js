@@ -49,11 +49,7 @@ exports.get_all_users = (req, res) => {
     .populate("roles", "_id name")
     .exec()
     .then(docs => {
-      const response = {
-        count: docs.length,
-        users: docs
-      };
-      res.status(200).json(response);
+      res.status(200).json(docs);
     })
     .catch(err => {
       console.log(err);
@@ -86,7 +82,7 @@ exports.create_user = (req, res) => {
               email: req.body.email,
               password: hash,
               phone: req.body.phone,
-              roles: req.body.roles
+              isAdmin: req.body.isAdmin
             });
             user
               .save()
@@ -152,7 +148,7 @@ exports.update_user = (req, res) => {
 
 exports.delete_user = (req, res) => {
   const id = req.params.userId;
-  User.remove({ _id: id })
+  User.deleteOne({ _id: id })
     .exec()
     .then(result => {
       res.status(200).json({
@@ -165,19 +161,4 @@ exports.delete_user = (req, res) => {
         error: err
       });
     });
-};
-
-exports.verify_token = (req, res) => {
-  const token = req.body.token;
-  if (token != "") {
-    jwt.verify(token, process.env.JWT_KEY, (error, decoded) => {
-      if (error) {
-        return res.status(404).json(error);
-      }
-      return res.status(200).json("ok");
-    });
-  }
-  return res.status(401).json({
-    message: "Auth failed"
-  });
 };

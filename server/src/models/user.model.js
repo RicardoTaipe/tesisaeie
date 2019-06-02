@@ -8,7 +8,7 @@ const userSchema = mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   phone: { type: String },
-  roles: [{ type: mongoose.Schema.Types.ObjectId, ref: "Role" }]
+  isAdmin: { type: Boolean, default: false }
 });
 
 module.exports = mongoose.model("User", userSchema);

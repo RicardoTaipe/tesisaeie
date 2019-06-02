@@ -21,7 +21,6 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "dist/client")));
 //Routes
 const userRoutes = require("./src/routes/user.route");
-const roleRoutes = require("./src/routes/role.route");
 const productRoutes = require("./src/routes/product.route");
 const categoryRoutes = require("./src/routes/category.route");
 const adsRoutes = require("./src/routes/ads.route");
@@ -32,7 +31,6 @@ const saleRoutes = require("./src/routes/sale.route");
 //https://aeie.glitch.me/
 
 app.use("/api/user", userRoutes);
-app.use("/api/role", roleRoutes);
 app.use("/api/product", productRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/ads", adsRoutes);

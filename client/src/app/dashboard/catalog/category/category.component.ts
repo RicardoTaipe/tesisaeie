@@ -14,6 +14,7 @@ import { CategoryService } from "src/app/services/category.service";
   templateUrl: "./category.component.html",
   styleUrls: ["./category.component.css"]
 })
+
 export class CategoryComponent implements OnInit {
   @ViewChild("tabs") tabGroup: MatTabGroup;
   @ViewChild(MatPaginator) paginator: MatPaginator;

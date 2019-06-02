@@ -13,7 +13,9 @@ import {
   MatMenuModule,
   MatCardModule,
   MatTableModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatChipsModule,
+  MatCheckboxModule
 } from "@angular/material";
 
 const MaterialComponents = [
@@ -30,7 +32,8 @@ const MaterialComponents = [
   MatMenuModule,
   MatCardModule,
   MatTableModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatCheckboxModule
 ];
 
 @NgModule({

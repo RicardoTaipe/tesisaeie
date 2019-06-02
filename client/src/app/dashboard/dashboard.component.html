@@ -103,10 +103,13 @@
         <mat-icon>account_circle</mat-icon>USUARIOS
       </mat-expansion-panel-header>
       <mat-nav-list>
-        <a mat-list-item routerLink="/roles" matTooltip="Info about the action"
+        <a
+          mat-list-item
+          matTooltip="Info about the action"
+          [routerLink]="['/dashboard/users']"
+          routerLinkActive="active"
           >Listar Usuarios</a
         >
-        <a mat-list-item routerLink="/permisos">Roles</a>
       </mat-nav-list>
     </mat-expansion-panel>
   </mat-accordion>
