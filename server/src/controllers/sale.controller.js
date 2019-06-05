@@ -5,15 +5,12 @@ const mongoose = require("mongoose");
 exports.get_all_sales = (req, res, next) => {
   Sale.find()
     //.select('_id name description')
+    .sort({ date: "desc" })
     .populate("user")
     .populate("products.product")
     .exec()
     .then(docs => {
-      const response = {
-        count: docs.length,
-        sales: docs
-      };
-      res.status(200).json(response);
+      res.status(200).json(docs);
     })
     .catch(err => {
       console.log(err);
@@ -23,7 +20,7 @@ exports.get_all_sales = (req, res, next) => {
     });
 };
 
-exports.create_sale = (req, res, next) => {
+exports.create_sale = async (req, res, next) => {
   UpdateStock(req.body.products, respuesta => {
     if (respuesta == false) {
       return res.json({

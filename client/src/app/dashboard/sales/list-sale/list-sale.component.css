@@ -1,0 +1,19 @@
+td {
+  padding-right: 8px;
+}
+
+table {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-width: 200px;
+}
+
+th.mat-header-cell {
+  text-align: left;
+  flex: 1;
+}
+
+th.mat-cell {
+  text-align: center;
+}

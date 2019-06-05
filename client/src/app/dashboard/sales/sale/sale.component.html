@@ -37,6 +37,7 @@
         placeholder="Cantidad"
         [(ngModel)]="sale.cantidad"
         type="number"
+        min="0"
       />
     </mat-form-field>
 
@@ -56,7 +57,12 @@
   </div>
   <div class="table-products">
     <h3>Lista de productos</h3>
-    <button class="button-venta" mat-raised-button color="primary" (click)=saveSale()>
+    <button
+      class="button-venta"
+      mat-raised-button
+      color="primary"
+      (click)="saveSale()"
+    >
       <mat-icon>save</mat-icon>
       Guardar venta
     </button>
