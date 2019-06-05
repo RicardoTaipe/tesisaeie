@@ -54,10 +54,18 @@
         <mat-icon>shopping_basket</mat-icon>VENTAS
       </mat-expansion-panel-header>
       <mat-nav-list>
-        <a mat-list-item routerLink="/venta" routerLinkActive="active"
+        <a
+          mat-list-item
+          [routerLink]="['/dashboard/sale']"
+          routerLinkActive="active"
           >Registrar Venta</a
         >
-        <a mat-list-item routerLink="/ventas-totales">Todas la ventas</a>
+        <a
+          mat-list-item
+          [routerLink]="['/dashboard/sales']"
+          routerLinkActive="active"
+          >Todas la ventas</a
+        >
       </mat-nav-list>
     </mat-expansion-panel>
 

@@ -1,11 +1,12 @@
 const Sale = require("../models/sale.model");
+const Product = require("../models/product.model");
 const mongoose = require("mongoose");
 
 exports.get_all_sales = (req, res, next) => {
   Sale.find()
     //.select('_id name description')
     .populate("user")
-    .populate("product")
+    .populate("products.product")
     .exec()
     .then(docs => {
       const response = {
@@ -23,28 +24,72 @@ exports.get_all_sales = (req, res, next) => {
 };
 
 exports.create_sale = (req, res, next) => {
-  const sale = new Sale({
-    _id: new mongoose.Types.ObjectId(),
-    date: req.body.date,
-    total_value: req.body.total_value,
-    products: req.body.products,
-    user: req.body.user
+  UpdateStock(req.body.products, respuesta => {
+    if (respuesta == false) {
+      return res.json({
+        mensaje: "No hay productos para guardar"
+      });
+    }
+    console.log(respuesta);
+
+    const sale = new Sale({
+      _id: new mongoose.Types.ObjectId(),
+      date: req.body.date,
+      total_value: req.body.total_value,
+      products: respuesta,
+      user: req.body.user
+    });
+    console.log(sale);
+    sale
+      .save()
+      .then(result => {
+        res.status(201).json({
+          message: "Created sale succesfully",
+          createdSale: {
+            result
+          }
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({
+          error: err
+        });
+      });
   });
-  sale
-    .save()
-    .then(result => {
-      res.status(201).json({
-        message: "Created sale succesfully",
-        createdSale: {
-          result
+};
+
+UpdateStock = async (products, callback) => {
+  let productos_id = [];
+  products.forEach(element => {
+    productos_id.push(element.product);
+  });
+  console.log(productos_id);
+  let respuesta = [];
+  Product.find({})
+    .where("_id")
+    .in(productos_id)
+    .exec(async (err, data) => {
+      for (let i = 0; i < data.length; i++) {
+        let cantidad = products.find(p => p.product == data[i]._id).quantity;
+
+        if (cantidad <= data[i].stock) {
+          cantidad_nueva = data[i].stock - cantidad;
+
+          let modifico = await Product.findByIdAndUpdate(data[i]._id, {
+            stock: cantidad_nueva
+          });
+
+          if (modifico != false) {
+            respuesta.push({
+              product: mongoose.Types.ObjectId(data[i]._id),
+              quantity: cantidad
+            });
+          }
         }
-      });
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({
-        error: err
-      });
+      }
+
+      callback(respuesta.length == 0 ? false : respuesta);
     });
 };
 
