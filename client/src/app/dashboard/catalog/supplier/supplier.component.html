@@ -1,6 +1,6 @@
 <div class="category-container">
   <mat-tab-group #tabs mat-align-tabs="start">
-    <!-- categorias registrados-->
+    <!-- proveedores registrados-->
     <mat-tab label="Proveedores Registrados">
       <mat-form-field>
         <input
@@ -84,6 +84,7 @@
               [(ngModel)]="supplier.name"
               #name="ngModel"
               required
+              type="text"
             />
             <mat-error [hidden]="name.valid || name.pristine"
               >Campo requerido</mat-error

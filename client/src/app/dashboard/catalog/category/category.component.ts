@@ -83,7 +83,7 @@ export class CategoryComponent implements OnInit {
   resetForm(form: NgForm) {
     form.reset();
     this.category = new Category();
-    //console.log(this.category)
+    this.tabGroup.selectedIndex = this.CATEGORIAS_REGISTRADAS;
   }
 
   showMessage(data) {

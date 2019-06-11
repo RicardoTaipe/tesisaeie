@@ -116,6 +116,7 @@ export class ProductComponent implements OnInit {
   resetForm(form: NgForm) {
     form.reset();
     this.product = new Product();
+    this.tabGroup.selectedIndex = this.PRODUCT_REGISTERED;
   }
 
   showMessage(data) {

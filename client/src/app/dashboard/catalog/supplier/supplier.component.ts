@@ -82,6 +82,7 @@ export class SupplierComponent implements OnInit {
   resetForm(form: NgForm) {
     form.reset();
     this.supplier = new Supplier();
+    this.tabGroup.selectedIndex = this.SUPPLIER_REGISTERED;
   }
 
   showMessage(data) {

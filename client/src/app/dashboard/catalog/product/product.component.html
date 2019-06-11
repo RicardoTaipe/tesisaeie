@@ -115,6 +115,7 @@
               [(ngModel)]="product.name"
               #name="ngModel"
               required
+              type="text"
             />
             <mat-error [hidden]="name.valid || name.pristine"
               >Campo requerido</mat-error
@@ -128,7 +129,6 @@
               name="description"
               [(ngModel)]="product.description"
               #description="ngModel"
-              required
             />
           </mat-form-field>
 

@@ -26,6 +26,10 @@ const categoryRoutes = require("./src/routes/category.route");
 const adsRoutes = require("./src/routes/ads.route");
 const supplierRoutes = require("./src/routes/supplier.route");
 const saleRoutes = require("./src/routes/sale.route");
+const semesterRoutes = require("./src/routes/semester.route");
+const careerRoutes = require("./src/routes/career.route");
+const lockerRoutes = require("./src/routes/locker.route");
+const aporteRoutes = require("./src/routes/aporte.route");
 
 //URI
 //https://aeie.glitch.me/
@@ -36,6 +40,16 @@ app.use("/api/category", categoryRoutes);
 app.use("/api/ads", adsRoutes);
 app.use("/api/supplier", supplierRoutes);
 app.use("/api/sale", saleRoutes);
+app.use("/api/semester", semesterRoutes);
+app.use("/api/career", careerRoutes);
+app.use("/api/locker", lockerRoutes);
+app.use("/api/aporte", aporteRoutes);
+/*
+app.use("/api/student", studentRoutes);
+
+app.use("/api/course", courseRoutes);
+
+*/
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "dist/client/index.html"));

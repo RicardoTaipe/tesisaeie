@@ -62,7 +62,7 @@
         ></mat-paginator>
       </div>
     </mat-tab>
-
+    <!-- registrar categoria-->
     <mat-tab label="Registrar Categoria">
       <form
         #categoryForm="ngForm"
@@ -84,6 +84,7 @@
               [(ngModel)]="category.name"
               #name="ngModel"
               required
+              type="text"
             />
             <mat-error [hidden]="name.valid || name.pristine"
               >Campo requerido</mat-error
