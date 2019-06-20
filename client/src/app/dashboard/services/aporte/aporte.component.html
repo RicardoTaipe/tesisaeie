@@ -1,0 +1,209 @@
+<div class="category-container">
+  <mat-tab-group #tabs mat-align-tabs="start">
+    <!-- aportes registrados-->
+    <mat-tab label="Aportes Registrados">
+      <mat-form-field>
+        <input
+          matInput
+          (keyup)="applyFilter($event.target.value)"
+          placeholder="Buscar"
+        />
+      </mat-form-field>
+
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nombres</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.student.names}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="lastname">
+            <th mat-header-cell *matHeaderCellDef>Apellidos</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.student.lastnames}}
+            </td>
+          </ng-container>
+
+          <!-- semester Column -->
+          <ng-container matColumnDef="semester">
+            <th mat-header-cell *matHeaderCellDef>Semestre</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.semester.name }}
+            </td>
+          </ng-container>
+
+          <!-- fecha Column -->
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef>Fecha</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.date | date: "short" }}
+            </td>
+          </ng-container>
+
+          <!-- valor Column -->
+          <ng-container matColumnDef="valor">
+            <th mat-header-cell *matHeaderCellDef>Valor</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.valor | currency }}
+            </td>
+          </ng-container>
+
+          <!-- description Column -->
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.description }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef>Actualizar</th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                mat-icon-button
+                color="accent"
+                (click)="updateProduct(element)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="deleteProduct(element._id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <mat-paginator
+          [pageSizeOptions]="[5, 10]"
+          showFirstLastButtons
+        ></mat-paginator>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Registrar Aporte">
+      <form
+        #aporteForm="ngForm"
+        autocomplete="off"
+        (ngSubmit)="saveAporte(aporteForm)"
+      >
+        <input
+          type="hidden"
+          name="_id"
+          #_id="ngModel"
+          [(ngModel)]="aporte._id"
+        />
+        <div class="example-container">
+          <mat-form-field>
+            <mat-label>Seleccionar un semestre</mat-label>
+            <mat-select
+              required
+              #semester
+              name="semester"
+              [(ngModel)]="aporte.semester"
+              [(value)]="aporte.semester"
+            >
+              <mat-option *ngFor="let semester of semesters" [value]="semester">
+                {{ semester.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="example-form-field">
+            <input
+              name="student"
+              matInput
+              type="text"
+              placeholder="Buscar Estudiante"
+              [(ngModel)]="aporte.student._id"
+            />
+            <mat-hint>{{ showFullName }}</mat-hint>
+            <button
+              mat-button
+              *ngIf="student"
+              matSuffix
+              mat-icon-button
+              aria-label="Clear"
+              (click)="openDialog()"
+            >
+              <mat-icon>search</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <mat-form-field [hideRequiredMarker]="true">
+            <span matPrefix>$ &nbsp;</span>
+            <input
+              matInput
+              placeholder="Ingrese el valor del aporte"
+              name="valor"
+              [(ngModel)]="aporte.price"
+              #valor="ngModel"
+              type="number"
+              required
+            />
+            <mat-error [hidden]="valor.valid || valor.pristine"
+              >Campo requerido</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field [hideRequiredMarker]="true">
+            <input
+              matInput
+              placeholder="Descripcion"
+              name="description"
+              [(ngModel)]="aporte.description"
+              #description="ngModel"
+            />
+          </mat-form-field>
+
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Fecha"
+              name="date"
+              [(ngModel)]="aporte.date"
+              #date="ngModel"
+              type="datetime"
+              [readonly]="true"
+            />
+            <!--
+            <mat-error [hidden]="date.valid || date.pristine"
+              >Campo requerido</mat-error
+            >-->
+          </mat-form-field>
+
+          <div>
+            <button mat-raised-button color="primary" type="submit">
+              <mat-icon>save</mat-icon>
+              Guardar
+            </button>
+
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="resetForm(aporteForm)"
+            >
+              <mat-icon>cancel</mat-icon>
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
+</div>

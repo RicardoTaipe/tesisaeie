@@ -21,7 +21,6 @@ export class ListSaleComponent implements OnInit {
 
   getSales() {
     this.saleService.getSales().subscribe(res => {
-      console.log(res);
       this.dataSource.data = res;
       this.dataSource.paginator = this.paginator;
     });

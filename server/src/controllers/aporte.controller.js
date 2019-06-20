@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 exports.get_all_aportes = (req, res, next) => {
   Aporte.find()
     //.select("_id name description")
+    .populate("student")
+    .populate("semester")
     .exec()
     .then(docs => {
       res.status(200).json(docs);

@@ -30,6 +30,7 @@ const semesterRoutes = require("./src/routes/semester.route");
 const careerRoutes = require("./src/routes/career.route");
 const lockerRoutes = require("./src/routes/locker.route");
 const aporteRoutes = require("./src/routes/aporte.route");
+const studentRoutes = require("./src/routes/student.route");
 
 //URI
 //https://aeie.glitch.me/
@@ -44,8 +45,9 @@ app.use("/api/semester", semesterRoutes);
 app.use("/api/career", careerRoutes);
 app.use("/api/locker", lockerRoutes);
 app.use("/api/aporte", aporteRoutes);
-/*
 app.use("/api/student", studentRoutes);
+/*
+
 
 app.use("/api/course", courseRoutes);
 

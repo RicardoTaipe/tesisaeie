@@ -1,0 +1,227 @@
+<div class="category-container">
+  <mat-tab-group #tabs mat-align-tabs="start">
+    <!-- usuarios registrados-->
+    <mat-tab label="Estudiantes Registrados">
+      <mat-form-field>
+        <input
+          matInput
+          (keyup)="applyFilter($event.target.value)"
+          placeholder="Buscar"
+        />
+      </mat-form-field>
+
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+          <!-- Name Column -->
+          <ng-container matColumnDef="names">
+            <th mat-header-cell *matHeaderCellDef>Nombres</th>
+            <td mat-cell *matCellDef="let element">{{ element.names }}</td>
+          </ng-container>
+
+          <!-- lastanames Column -->
+          <ng-container matColumnDef="lastnames">
+            <th mat-header-cell *matHeaderCellDef>Apellidos</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.lastnames }}
+            </td>
+          </ng-container>
+
+          career Column 
+          <ng-container matColumnDef="career">
+            <th mat-header-cell *matHeaderCellDef>Carrera</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.career.name }}
+            </td>
+          </ng-container>
+          <!--cedula-->
+          <ng-container matColumnDef="cedula">
+            <th mat-header-cell *matHeaderCellDef>Cedula</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.cedula }}
+            </td>
+          </ng-container>
+
+          <!--numeor unico-->
+          <ng-container matColumnDef="numero_unico">
+            <th mat-header-cell *matHeaderCellDef>Numero Unico</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.numero_unico }}
+            </td>
+          </ng-container>
+
+          <!-- email Column -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>Correo</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.email }}
+            </td>
+          </ng-container>
+
+          <!-- phone Column -->
+          <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef>Telefono</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.phone }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>Seleccionar</th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                mat-icon-button
+                color="accent"
+                (click)="selectStudent(element)"
+              >
+                <mat-icon>check_circle</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 20]"
+          showFirstLastButtons
+        ></mat-paginator>
+      </div>
+    </mat-tab>
+    <!--Registrar estudiantes-->
+    <mat-tab label="Registrar Estudiante">
+      <form
+        #studentForm="ngForm"
+        autocomplete="off"
+        (ngSubmit)="saveStudent(studentForm)"
+      >
+        <input
+          type="hidden"
+          name="_id"
+          #_id="ngModel"
+          [(ngModel)]="student._id"
+        />
+        <div class="example-container">
+          <mat-form-field [hideRequiredMarker]="true">
+            <input
+              matInput
+              placeholder="Nombres"
+              name="names"
+              [(ngModel)]="student.names"
+              #names="ngModel"
+              required
+            />
+            <mat-error [hidden]="names.valid || names.pristine"
+              >Campo requerido</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field [hideRequiredMarker]="true">
+            <input
+              matInput
+              placeholder="Apellidos"
+              name="lastnames"
+              [(ngModel)]="student.lastnames"
+              #lastnames="ngModel"
+              required
+            />
+            <mat-error [hidden]="lastnames.valid || lastnames.pristine"
+              >Campo requerido</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Seleccionar una carrera</mat-label>
+            <mat-select
+              #career
+              name="career"
+              [(ngModel)]="student.career"
+              [(value)]="student.career"
+              required
+            >
+              <mat-option *ngFor="let career of careers" [value]="career">
+                {{ career.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field [hideRequiredMarker]="true">
+            <input
+              matInput
+              placeholder="Cedula"
+              name="cedula"
+              [(ngModel)]="student.cedula"
+              #cedula="ngModel"
+              required
+              type="number"
+            />
+            <mat-error [hidden]="cedula.valid || cedula.pristine"
+              >Campo requerido</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field [hideRequiredMarker]="true">
+            <input
+              matInput
+              placeholder="Numero unico"
+              name="numero_unico"
+              [(ngModel)]="student.numero_unico"
+              #unico="ngModel"
+              required
+              type="number"
+            />
+            <mat-error [hidden]="unico.valid || unico.pristine"
+              >Campo requerido</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field [hideRequiredMarker]="true">
+            <input
+              matInput
+              placeholder="Email"
+              name="email"
+              [(ngModel)]="student.email"
+              #email="ngModel"
+              required
+              type="email"
+            />
+            <mat-error [hidden]="email.valid || email.pristine"
+              >Campo requerido</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field [hideRequiredMarker]="true">
+            <input
+              matInput
+              placeholder="Telefono"
+              name="phone"
+              [(ngModel)]="student.phone"
+              #phone="ngModel"
+              type="number"
+              required
+            />
+            <mat-error [hidden]="phone.valid || phone.pristine"
+              >Campo requerido</mat-error
+            >
+          </mat-form-field>
+
+          <div>
+            <button mat-raised-button color="primary" type="submit">
+              <mat-icon>save</mat-icon>
+              Guardar
+            </button>
+
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="resetForm(studentForm)"
+            >
+              <mat-icon>cancel</mat-icon>
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
+</div>

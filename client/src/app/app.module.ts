@@ -19,6 +19,10 @@ import { SupplierComponent } from "./dashboard/catalog/supplier/supplier.compone
 import { UserComponent } from './dashboard/users/user/user.component';
 import { SaleComponent } from './dashboard/sales/sale/sale.component';
 import { ListSaleComponent } from './dashboard/sales/list-sale/list-sale.component';
+import { SemesterComponent } from './dashboard/services/semester/semester.component';
+import { AporteComponent } from './dashboard/services/aporte/aporte.component';
+import { StudentComponent } from './dashboard/services/student/student.component';
+import { SearchStudentComponent } from './dashboard/services/search-student/search-student.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,11 @@ import { ListSaleComponent } from './dashboard/sales/list-sale/list-sale.compone
     SupplierComponent,
     UserComponent,
     SaleComponent,
-    ListSaleComponent
+    ListSaleComponent,
+    SemesterComponent,
+    AporteComponent,
+    StudentComponent,
+    SearchStudentComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +57,7 @@ import { ListSaleComponent } from './dashboard/sales/list-sale/list-sale.compone
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[SearchStudentComponent]
 })
 export class AppModule {}

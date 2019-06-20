@@ -74,13 +74,26 @@
         <mat-icon>business</mat-icon>SERVICIOS
       </mat-expansion-panel-header>
       <mat-nav-list>
-        <a mat-list-item routerLink="/curso">Registrar Aportante</a>
-        <a mat-list-item routerLink="/curso">Registrar Aporte</a>
-        <a mat-list-item routerLink="/casillero">Casillero</a>
-        <a mat-list-item routerLink="/registro-casillero"
-          >Registro de Estudiantes</a
+        <a
+          mat-list-item
+          [routerLink]="['/dashboard/semester']"
+          routerLinkActive="active"
+          >Registrar Semestre</a
         >
-        <a mat-list-item routerLink="/casillero">Notificacion correo</a>
+        <a
+          mat-list-item
+          [routerLink]="['/dashboard/aporte']"
+          routerLinkActive="active"
+          >Aportes</a
+        >
+        <a mat-list-item routerLink="/lockers">Casillero</a>
+        <a
+          mat-list-item
+          [routerLink]="['/dashboard/student']"
+          routerLinkActive="active"
+          >Estudiantes</a
+        >
+        <a mat-list-item routerLink="/email">Notificacion correo</a>
       </mat-nav-list>
     </mat-expansion-panel>
 

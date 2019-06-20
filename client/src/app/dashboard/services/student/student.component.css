@@ -1,0 +1,58 @@
+table {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-width: 200px;
+}
+
+th.mat-header-cell {
+  text-align: left;
+  flex: 1;
+}
+
+th.mat-cell {
+  text-align: center;
+}
+
+.example-container > * {
+  width: 80%;
+}
+
+.mat-tab-group {
+  margin-bottom: 48px;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+td {
+  padding-right: 8px;
+}
+
+button {
+  width: 20% !important;
+  align-self: flex-start;
+  margin-right: 20px;
+}
+.example-container > * {
+  width: 80%;
+}
+
+.mat-tab-group {
+  margin-bottom: 48px;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+td {
+  padding-right: 8px;
+}
+
+button {
+  width: 20% !important;
+  align-self: flex-start;
+  margin-right: 20px;
+}

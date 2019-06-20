@@ -1,16 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import {
   MatPaginator,
   MatTabGroup,
   MatTableDataSource,
   MatOption,
-  MatSnackBar,
-  MatAutocomplete,
-  MatChipInputEvent,
-  MatAutocompleteSelectedEvent
-} from "@angular/material";
+  MatSnackBar} from "@angular/material";
 import { User } from "src/app/model/user";
-import { Role } from "src/app/model/role";
 import { UserService } from "src/app/services/user.service";
 import { NgForm } from "@angular/forms";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
@@ -56,7 +51,6 @@ export class UserComponent implements OnInit {
   }
 
   saveUser(userForm: NgForm) {
-    console.log(userForm.value);
     if (userForm.form.valid) {
       if (userForm.value._id == null) {
         this.userService.addUser(userForm.value).subscribe(data => {
@@ -91,7 +85,6 @@ export class UserComponent implements OnInit {
   }
 
   updateUser(userSelected: User) {
-    console.log(userSelected);
     this.user = Object.assign({}, userSelected);
     this.tabGroup.selectedIndex = this.REGISTER_USER;
   }
