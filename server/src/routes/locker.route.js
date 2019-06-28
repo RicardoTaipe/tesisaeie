@@ -13,5 +13,7 @@ router.get("/:lockerId", LockerController.get_locker);
 router.put("/:lockerId", LockerController.update_locker);
 //Delete a locker by Id
 router.delete("/:lockerId", LockerController.delete_locker);
+//Alquilar
+router.put("/:lockerId/student/:studentId", LockerController.alquilar_locker);
 
 module.exports = router;

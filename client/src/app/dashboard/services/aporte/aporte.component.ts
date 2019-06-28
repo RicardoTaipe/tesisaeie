@@ -119,6 +119,7 @@ export class AporteComponent implements OnInit {
     this.aporte = new Aporte();
     this.aporte.student = new Student();
     this.tabGroup.selectedIndex = this.APORTE_REGISTERED;
+    this.showFullName = " ";
   }
 
   showMessage(data) {

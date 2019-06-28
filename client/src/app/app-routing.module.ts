@@ -12,6 +12,8 @@ import { ListSaleComponent } from "./dashboard/sales/list-sale/list-sale.compone
 import { SemesterComponent } from "./dashboard/services/semester/semester.component";
 import { AporteComponent } from "./dashboard/services/aporte/aporte.component";
 import { StudentComponent } from "./dashboard/services/student/student.component";
+import { LockerComponent } from "./dashboard/services/locker/locker.component";
+import { AlquilarComponent } from "./dashboard/services/alquilar/alquilar.component";
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -32,7 +34,9 @@ const routes: Routes = [
           { path: "sales", component: ListSaleComponent },
           { path: "semester", component: SemesterComponent },
           { path: "aporte", component: AporteComponent },
-          { path: "student", component: StudentComponent }
+          { path: "student", component: StudentComponent },
+          { path: "locker", component: LockerComponent },
+          { path: "alquiler", component: AlquilarComponent }
         ]
       }
     ]

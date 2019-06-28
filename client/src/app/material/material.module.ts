@@ -16,7 +16,8 @@ import {
   MatPaginatorModule,
   MatCheckboxModule,
   MatAutocompleteModule,
-  MatDialogModule
+  MatDialogModule,
+  MatStepperModule
 } from "@angular/material";
 
 const MaterialComponents = [
@@ -36,7 +37,8 @@ const MaterialComponents = [
   MatPaginatorModule,
   MatCheckboxModule,
   MatAutocompleteModule,
-  MatDialogModule
+  MatDialogModule,
+  MatStepperModule
 ];
 
 @NgModule({

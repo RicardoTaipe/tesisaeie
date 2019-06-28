@@ -23,6 +23,8 @@ import { SemesterComponent } from './dashboard/services/semester/semester.compon
 import { AporteComponent } from './dashboard/services/aporte/aporte.component';
 import { StudentComponent } from './dashboard/services/student/student.component';
 import { SearchStudentComponent } from './dashboard/services/search-student/search-student.component';
+import { LockerComponent } from './dashboard/services/locker/locker.component';
+import { AlquilarComponent } from './dashboard/services/alquilar/alquilar.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { SearchStudentComponent } from './dashboard/services/search-student/sear
     SemesterComponent,
     AporteComponent,
     StudentComponent,
-    SearchStudentComponent
+    SearchStudentComponent,
+    LockerComponent,
+    AlquilarComponent
   ],
   imports: [
     BrowserModule,

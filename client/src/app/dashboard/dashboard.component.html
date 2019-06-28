@@ -82,18 +82,28 @@
         >
         <a
           mat-list-item
-          [routerLink]="['/dashboard/aporte']"
-          routerLinkActive="active"
-          >Aportes</a
-        >
-        <a mat-list-item routerLink="/lockers">Casillero</a>
-        <a
-          mat-list-item
           [routerLink]="['/dashboard/student']"
           routerLinkActive="active"
           >Estudiantes</a
         >
-        <a mat-list-item routerLink="/email">Notificacion correo</a>
+        <a
+          mat-list-item
+          [routerLink]="['/dashboard/aporte']"
+          routerLinkActive="active"
+          >Aportes</a
+        >
+        <a
+          mat-list-item
+          [routerLink]="['/dashboard/locker']"
+          routerLinkActive="active"
+          >Casillero</a
+        >
+        <a
+          mat-list-item
+          [routerLink]="['/dashboard/alquiler']"
+          routerLinkActive="active"
+          >Alquilar Casillero</a
+        >
       </mat-nav-list>
     </mat-expansion-panel>
 
