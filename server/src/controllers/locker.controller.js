@@ -19,7 +19,7 @@ exports.get_all_lockers = (req, res, next) => {
   } else {
     Locker.find()
       //.select("_id name description")
-      .populate('student')
+      .populate("student")
       .exec()
       .then(docs => {
         res.status(200).json(docs);
@@ -129,4 +129,28 @@ exports.alquilar_locker = (req, res, next) => {
         message: err
       });
     });
+};
+
+exports.terminar_alquiler = (req, res, next) => {
+  const { lockerId, studentId } = req.params;
+  Locker.findOne({ _id: lockerId }, (err, lock) => {
+    if (err) {
+      res.status(500).json({
+        message: err
+      });
+    }
+    lock.student = undefined;
+    lock.state = false;
+    lock.valor = undefined;
+    lock.save((err, doc) => {
+      if (err) {
+        res.status(500).json({
+          message: err
+        });
+      }
+      res.status(200).json({
+        message: "Casillero Libre"
+      });
+    });
+  });
 };

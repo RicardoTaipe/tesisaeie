@@ -56,18 +56,19 @@
         <div class="mat-elevation-z8">
           <table mat-table [dataSource]="dataSourceStudent">
             <!-- names Column -->
-            <ng-container matColumnDef="names">
+              <ng-container matColumnDef="names">
               <th mat-header-cell *matHeaderCellDef>Nombres</th>
               <td mat-cell *matCellDef="let element">
                 {{ element.names }}
               </td>
             </ng-container>
+            
 
             <!-- lastanames Column -->
             <ng-container matColumnDef="lastnames">
               <th mat-header-cell *matHeaderCellDef>Apellidos</th>
               <td mat-cell *matCellDef="let element">
-                {{ element.state ? "OCUPADO" : "LIBRE" }}
+                {{ element.lastnames }}
               </td>
             </ng-container>
 

@@ -11,7 +11,6 @@ exports.get_all_products = (req, res, next) => {
       res.status(200).json(docs);
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
@@ -39,7 +38,6 @@ exports.create_product = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
@@ -54,7 +52,6 @@ exports.get_product = (req, res, next) => {
     .populate("supplier", "-__v")
     .exec()
     .then(doc => {
-      console.log(doc);
       if (doc) {
         res.status(200).json(doc);
       } else {
@@ -64,7 +61,6 @@ exports.get_product = (req, res, next) => {
       }
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({ error: err });
     });
 };
@@ -77,7 +73,6 @@ exports.update_product = (req, res, next) => {
   for (const props of Object.keys(req.body)) {
     updateProps[props] = req.body[props];
   }
-  console.log(updateProps);
 
   Product.updateOne({ _id: id }, { $set: updateProps })
     .exec()
@@ -87,7 +82,6 @@ exports.update_product = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
@@ -104,7 +98,6 @@ exports.delete_product = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });

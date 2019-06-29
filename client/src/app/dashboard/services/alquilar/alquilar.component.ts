@@ -112,12 +112,20 @@ export class AlquilarComponent implements OnInit {
           this.getLockersNotFree();
           this.resetStepper();
         },
-        rerr => {}
+        err => {}
       );
     }
   }
 
-  terminarAlquiler() {}
+  terminarAlquiler(lockerSelected: Locker) {
+    if (confirm("Esta seguro de eliminar este item?")) {
+      this.lockerService.terminarAlquiler(lockerSelected).subscribe(res => {
+        this.showMessage(res);
+        this.getLockers();
+        this.getLockersNotFree();
+      });
+    }
+  }
 
   showMessage(data) {
     this.snackBar.open(data.message, "OK", {

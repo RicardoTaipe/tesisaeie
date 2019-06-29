@@ -36,4 +36,10 @@ export class LockerService {
       locker
     );
   }
+
+  terminarAlquiler(locker: Locker) {
+    return this.http.delete(
+      this.URL_API + `/${locker._id}/student/${locker.student._id}`
+    );
+  }
 }
