@@ -42,4 +42,10 @@ export class LockerService {
       this.URL_API + `/${locker._id}/student/${locker.student._id}`
     );
   }
+
+  notify(locker:Locker){
+    const body={email:locker.student.email ,casillero:locker.description};
+
+    return this.http.post(this.URL_API+"/notify",body)
+  }
 }

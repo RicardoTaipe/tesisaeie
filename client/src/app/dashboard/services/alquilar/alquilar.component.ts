@@ -119,6 +119,10 @@ export class AlquilarComponent implements OnInit {
   }
 
   notificar(locker:Locker){
+    console.log(locker)
+    this.lockerService.notify(locker).subscribe(res=>{
+      this.showMessage(res);
+    });
     
   }
 

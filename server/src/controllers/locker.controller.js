@@ -1,5 +1,7 @@
 const Locker = require("../models/locker.model");
 const mongoose = require("mongoose");
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 exports.get_all_lockers = (req, res, next) => {
   let state = req.query.state;
@@ -155,7 +157,26 @@ exports.terminar_alquiler = (req, res, next) => {
   });
 };
 
-exports.notify_locker= (req,res,next)=>{
-  console.log(req.body.name)
-  next()
+exports.notify_locker = (req, res, next) => {
+  const { email, casillero } = req.body;
+  const msg = {
+    to: email,
+    from: "taipericardo@gmail.com",
+    subject: "AEIE RETIRO DE PERTENENCIAS PERSONALES",
+    text: `Estimado/a estudiante, por favor acercarse a retirar sus pertenencias personales del casillero ${casillero}
+    en caso de no renovar el alquiler del casillero`
+    //html: "<strong>and easy to do anywhere, even with Node.js</strong>"
+  };
+  sgMail
+    .send(msg)
+    .then(() => {
+      res.status(200).json({
+        message: "Notificacion enviada"
+      });
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: err
+      });
+    });
 };
