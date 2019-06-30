@@ -154,3 +154,8 @@ exports.terminar_alquiler = (req, res, next) => {
     });
   });
 };
+
+exports.notify_locker= (req,res,next)=>{
+  console.log(req.body.name)
+  next()
+};

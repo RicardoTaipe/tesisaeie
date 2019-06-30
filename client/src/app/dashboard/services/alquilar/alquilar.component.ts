@@ -28,6 +28,7 @@ export class AlquilarComponent implements OnInit {
     "estado",
     "nombres",
     "apellidos",
+    "notificar",
     "terminar"
   ];
   displayedColumnsStudent: string[] = ["names", "lastnames", "Seleccionar"];
@@ -115,6 +116,10 @@ export class AlquilarComponent implements OnInit {
         err => {}
       );
     }
+  }
+
+  notificar(locker:Locker){
+    
   }
 
   terminarAlquiler(lockerSelected: Locker) {

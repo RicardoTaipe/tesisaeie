@@ -17,4 +17,6 @@ router.delete("/:lockerId", LockerController.delete_locker);
 router.put("/:lockerId/student/:studentId", LockerController.alquilar_locker);
 //Terminar alquiler
 router.delete("/:lockerId/student/:studentId", LockerController.terminar_alquiler);
+//Notificard
+router.post("/notify",LockerController.notify_locker);
 module.exports = router;

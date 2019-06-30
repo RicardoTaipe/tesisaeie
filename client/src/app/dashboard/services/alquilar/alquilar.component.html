@@ -166,6 +166,19 @@
           </td>
         </ng-container>
 
+        <ng-container matColumnDef="notificar">
+          <th mat-header-cell *matHeaderCellDef>Notificar retiro de pertenencias personales</th>
+          <td mat-cell *matCellDef="let element">
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="notificar(element)"
+            >
+              <mat-icon> contact_mail</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
         <ng-container matColumnDef="terminar">
           <th mat-header-cell *matHeaderCellDef>Terminar alquiler</th>
           <td mat-cell *matCellDef="let element">
