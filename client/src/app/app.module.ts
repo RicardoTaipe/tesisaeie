@@ -25,6 +25,8 @@ import { StudentComponent } from './dashboard/services/student/student.component
 import { SearchStudentComponent } from './dashboard/services/search-student/search-student.component';
 import { LockerComponent } from './dashboard/services/locker/locker.component';
 import { AlquilarComponent } from './dashboard/services/alquilar/alquilar.component';
+import { CourseComponent } from './dashboard/courses/course/course.component';
+import { RegisterCourseComponent } from './dashboard/courses/register-course/register-course.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { AlquilarComponent } from './dashboard/services/alquilar/alquilar.compon
     StudentComponent,
     SearchStudentComponent,
     LockerComponent,
-    AlquilarComponent
+    AlquilarComponent,
+    CourseComponent,
+    RegisterCourseComponent
   ],
   imports: [
     BrowserModule,

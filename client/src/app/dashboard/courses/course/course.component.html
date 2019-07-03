@@ -1,7 +1,7 @@
 <div class="category-container">
   <mat-tab-group #tabs mat-align-tabs="start">
-    <!-- productos registrados-->
-    <mat-tab label="Productos Registrados">
+    <!-- cursos registrados-->
+    <mat-tab label="Cursos Registrados">
       <mat-form-field>
         <input
           matInput
@@ -33,27 +33,26 @@
               {{ element.price | currency }}
             </td>
           </ng-container>
-
+          <!-- date Column -->
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef>Fecha</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.date | date: "shortDate" }}
+            </td>
+          </ng-container>
           <!-- stock Column -->
-          <ng-container matColumnDef="stock">
-            <th mat-header-cell *matHeaderCellDef>Stock</th>
+          <ng-container matColumnDef="places">
+            <th mat-header-cell *matHeaderCellDef>Cupos</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.stock }}
+              {{ element.places }}
             </td>
           </ng-container>
 
-          <!-- catgory Column -->
-          <ng-container matColumnDef="category">
-            <th mat-header-cell *matHeaderCellDef>Categoria</th>
+          <!-- semestre Column -->
+          <ng-container matColumnDef="semester">
+            <th mat-header-cell *matHeaderCellDef>Semestre</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.category.name }}
-            </td>
-          </ng-container>
-          <!-- supplier Column -->
-          <ng-container matColumnDef="supplier">
-            <th mat-header-cell *matHeaderCellDef>Proveedor</th>
-            <td mat-cell *matCellDef="let element">
-              {{ element.supplier.name }}
+              {{ element.semester.name }}
             </td>
           </ng-container>
 
@@ -63,7 +62,7 @@
               <button
                 mat-icon-button
                 color="accent"
-                (click)="updateProduct(element)"
+                (click)="updateCourse(element)"
               >
                 <mat-icon>edit</mat-icon>
               </button>
@@ -76,7 +75,7 @@
               <button
                 mat-icon-button
                 color="warn"
-                (click)="deleteProduct(element._id)"
+                (click)="deleteCourse(element._id)"
               >
                 <mat-icon>delete</mat-icon>
               </button>
@@ -94,17 +93,17 @@
       </div>
     </mat-tab>
 
-    <mat-tab label="Registrar Producto">
+    <mat-tab label="Registrar Curso">
       <form
-        #productForm="ngForm"
+        #courseForm="ngForm"
         autocomplete="off"
-        (ngSubmit)="saveProduct(productForm)"
+        (ngSubmit)="saveCourse(courseForm)"
       >
         <input
           type="hidden"
           name="_id"
           #_id="ngModel"
-          [(ngModel)]="product._id"
+          [(ngModel)]="course._id"
         />
         <div class="example-container">
           <mat-form-field [hideRequiredMarker]="true">
@@ -112,7 +111,7 @@
               matInput
               placeholder="Nombre"
               name="name"
-              [(ngModel)]="product.name"
+              [(ngModel)]="course.name"
               #name="ngModel"
               required
               type="text"
@@ -123,13 +122,13 @@
           </mat-form-field>
 
           <mat-form-field [hideRequiredMarker]="true">
-            <input
+            <textarea
               matInput
               placeholder="Descripcion"
               name="description"
-              [(ngModel)]="product.description"
+              [(ngModel)]="course.description"
               #description="ngModel"
-            />
+            ></textarea>
           </mat-form-field>
 
           <mat-form-field [hideRequiredMarker]="true">
@@ -138,7 +137,7 @@
               matInput
               placeholder="Precio"
               name="price"
-              [(ngModel)]="product.price"
+              [(ngModel)]="course.price"
               #price="ngModel"
               type="number"
               required
@@ -148,49 +147,48 @@
             >
           </mat-form-field>
 
+          <mat-form-field>
+            <input
+              matInput
+              name="date"
+              [(ngModel)]="course.date"
+              [min]="minDate"
+              [matDatepicker]="picker"
+              placeholder="Choose a date"
+            />
+            <mat-datepicker-toggle
+              matPrefix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
           <mat-form-field [hideRequiredMarker]="true">
             <input
               matInput
-              placeholder="Stock"
-              name="stock"
-              [(ngModel)]="product.stock"
-              #stock="ngModel"
+              placeholder="Cupos"
+              name="places"
+              [(ngModel)]="course.places"
+              #places="ngModel"
               type="number"
               required
             />
-            <mat-error [hidden]="stock.valid || stock.pristine"
+            <mat-error [hidden]="places.valid || places.pristine"
               >Campo requerido</mat-error
             >
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label>Seleccionar una categoria</mat-label>
+            <mat-label>Seleccione un semestre</mat-label>
             <mat-select
-              #category
-              name="category"
-              [(ngModel)]="product.category"
-              [(value)]="product.category"
+              #semester
+              name="semester"
+              [(ngModel)]="course.semester"
+              [(value)]="course.semester"
               required
             >
-              <mat-option
-                *ngFor="let category of categories"
-                [value]="category"
-              >
-                {{ category.name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-label>Seleccionar un proveedor</mat-label>
-            <mat-select
-              #supplier
-              name="supplier"
-              [(ngModel)]="product.supplier"
-              [(value)]="product.supplier"
-            >
-              <mat-option *ngFor="let supplier of suppliers" [value]="supplier">
-                {{ supplier.name }}
+              <mat-option *ngFor="let semester of semesters" [value]="semester">
+                {{ semester.name }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -204,7 +202,7 @@
             <button
               mat-raised-button
               color="primary"
-              (click)="resetForm(productForm)"
+              (click)="resetForm(courseForm)"
             >
               <mat-icon>cancel</mat-icon>
               Cancelar

@@ -1,9 +1,11 @@
-const course = require("../models/course.model");
+const Course = require("../models/course.model");
 const mongoose = require("mongoose");
 
 exports.get_all_courses = (req, res, next) => {
   Course.find()
     //.select("_id name description")
+    .populate('semester')
+    .populate("students")
     .exec()
     .then(docs => {
       res.status(200).json(docs);
@@ -20,11 +22,12 @@ exports.create_course = (req, res, next) => {
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
     description: req.body.description,
-    content: req.body.content,
+    //content: req.body.content,
     date: req.body.date,
+    price:req.body.price,
     places: req.body.places,
     semester: req.body.semester,
-    students: req.body.students
+    //students: req.body.students
   });
   course
     .save()

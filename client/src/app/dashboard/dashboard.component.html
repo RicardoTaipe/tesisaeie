@@ -112,9 +112,17 @@
         <mat-icon>assignment</mat-icon>CURSOS
       </mat-expansion-panel-header>
       <mat-nav-list>
-        <a mat-list-item routerLink="/curso">Registrar Curso</a>
+        <a
+          mat-list-item
+          [routerLink]="['/dashboard/course']"
+          routerLinkActive="active"
+          >Registrar Curso</a
+        >
 
-        <a mat-list-item routerLink="/registro-curso"
+        <a
+          mat-list-item
+          [routerLink]="['/dashboard/register']"
+          routerLinkActive="active"
           >Registro de Estudiantes</a
         >
       </mat-nav-list>
