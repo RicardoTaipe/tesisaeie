@@ -20,23 +20,22 @@ export class RegisterCourseComponent implements OnInit {
   @ViewChild("tabs") tabGroup: MatTabGroup;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild("student") paginatorStudent: MatPaginator;
+  @ViewChild("courses") paginatorCourses: MatPaginator;
   @ViewChild("stepper") stepper: MatHorizontalStepper;
 
   course: Course = new Course();
   student: Student = new Student();
   displayedColumns: string[] = ["name", "places", "seleccionar"];
-  displayedColumnsAlquiler: string[] = [
-    "casillero",
-    "estado",
-    "nombres",
-    "apellidos",
-    "notificar",
-    "terminar"
+  displayedColumnsCourses: string[] = [
+    "nombreCurso",
+    "fechaCurso",
+    "semesterCurso",
+    "studentsCurso"
   ];
   displayedColumnsStudent: string[] = ["names", "lastnames", "Seleccionar"];
   dataSource = new MatTableDataSource<Course>();
   dataSourceStudent = new MatTableDataSource<Student>();
-  dataSourceAlquiler = new MatTableDataSource<Course>();
+  dataSourceCourses = new MatTableDataSource<Course>();
 
   constructor(
     private courseService: CourseService,
@@ -57,7 +56,9 @@ export class RegisterCourseComponent implements OnInit {
   getCourses() {
     this.courseService.getCourses().subscribe(res => {
       this.dataSource.data = res;
+      this.dataSourceCourses.data = res;
       this.dataSource.paginator = this.paginator;
+      this.dataSourceCourses.paginator = this.paginatorCourses;
     });
   }
 
@@ -111,7 +112,7 @@ export class RegisterCourseComponent implements OnInit {
       }
       this.course.students.push(this.student);
       console.log(this.course);
-      this.courseService.updateCourse(this.course._id,this.course).subscribe(
+      this.courseService.updateCourse(this.course._id, this.course).subscribe(
         res => {
           this.showMessage(res);
           this.getCourses();
@@ -123,7 +124,7 @@ export class RegisterCourseComponent implements OnInit {
   }
 
   searchStudent(student: Student) {
-    return this.course.students.findIndex((e: Student) => e == student);
+    return this.course.students.findIndex((e: Student) => e._id == student._id);
   }
   // terminarAlquiler(lockerSelected: Locker) {
   //   if (confirm("Esta seguro de eliminar este item?")) {

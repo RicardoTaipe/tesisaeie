@@ -11,7 +11,7 @@ router.post("/", AdsController.create_ad);
 //Show a Ad by Id
 router.get("/:adId", AdsController.get_ad);
 //Update a Ad by Id
-router.patch("/:adId", AdsController.update_ad);
+router.put("/:adId", AdsController.update_ad);
 //Delete a Ad by Id
 router.delete("/:adId", AdsController.delete_ad);
 

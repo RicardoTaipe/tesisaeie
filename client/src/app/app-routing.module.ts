@@ -16,6 +16,7 @@ import { LockerComponent } from "./dashboard/services/locker/locker.component";
 import { AlquilarComponent } from "./dashboard/services/alquilar/alquilar.component";
 import { CourseComponent } from "./dashboard/courses/course/course.component";
 import { RegisterCourseComponent } from "./dashboard/courses/register-course/register-course.component";
+import { AdsComponent } from "./dashboard/informative/ads/ads.component";
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -40,7 +41,8 @@ const routes: Routes = [
           { path: "locker", component: LockerComponent },
           { path: "alquiler", component: AlquilarComponent },
           { path: "course", component: CourseComponent },
-          { path: "register", component: RegisterCourseComponent }
+          { path: "register", component: RegisterCourseComponent },
+          { path: "anuncios", component: AdsComponent }
         ]
       }
     ]

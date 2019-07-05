@@ -4,13 +4,10 @@ const mongoose = require("mongoose");
 exports.get_all_ads = (req, res, next) => {
   Ads.find()
     .select("_id title description date")
+    .sort({ date: "desc" })
     .exec()
     .then(docs => {
-      const response = {
-        count: docs.length,
-        ads: docs
-      };
-      res.status(200).json(response);
+      res.status(200).json(docs);
     })
     .catch(err => {
       console.log(err);
@@ -25,15 +22,12 @@ exports.create_ad = (req, res, next) => {
     _id: new mongoose.Types.ObjectId(),
     title: req.body.title,
     description: req.body.description,
-    date: req.body.date
+    date: new Date()
   });
   ad.save()
     .then(result => {
       res.status(201).json({
-        message: "Created ad succesfully",
-        createdAd: {
-          result
-        }
+        message: "Created ad succesfully"
       });
     })
     .catch(err => {
@@ -66,9 +60,10 @@ exports.get_ad = (req, res, next) => {
 };
 
 exports.update_ad = (req, res, next) => {
+  console.log(req.body);
   const id = req.params.adId;
 
-  const updateProps = {};
+  const updateProps = { date: new Date() };
 
   for (const props of Object.keys(req.body)) {
     updateProps[props] = req.body[props];
@@ -92,7 +87,7 @@ exports.update_ad = (req, res, next) => {
 
 exports.delete_ad = (req, res, next) => {
   const id = req.params.adId;
-  Ads.remove({ _id: id })
+  Ads.deleteOne({ _id: id })
     .exec()
     .then(result => {
       res.status(200).json({

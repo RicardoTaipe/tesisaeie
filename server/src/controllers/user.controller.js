@@ -33,7 +33,7 @@ exports.login = (req, res) => {
           return res.status(200).json({
             message: "Auth succesful",
             token: token,
-            uid: user[0]._id
+            uid: user[0]._id,
           });
         }
         return res.status(401).json({
@@ -46,7 +46,6 @@ exports.login = (req, res) => {
 exports.get_all_users = (req, res) => {
   User.find()
     .select("-__v")
-    .populate("roles", "_id name")
     .exec()
     .then(docs => {
       res.status(200).json(docs);

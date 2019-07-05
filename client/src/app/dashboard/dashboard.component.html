@@ -133,11 +133,16 @@
         <mat-icon>event</mat-icon>INFORMATIVO
       </mat-expansion-panel-header>
       <mat-nav-list>
-        <a mat-list-item routerLink="/informativo">Publicar</a>
+        <a
+          mat-list-item
+          [routerLink]="['/dashboard/anuncios']"
+          routerLinkActive="active"
+          >Publicar</a
+        >
       </mat-nav-list>
     </mat-expansion-panel>
 
-    <mat-expansion-panel>
+    <mat-expansion-panel [disabled]="verify()">
       <mat-expansion-panel-header>
         <mat-icon>account_circle</mat-icon>USUARIOS
       </mat-expansion-panel-header>

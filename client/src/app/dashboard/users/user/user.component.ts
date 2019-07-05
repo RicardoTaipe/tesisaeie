@@ -4,7 +4,8 @@ import {
   MatTabGroup,
   MatTableDataSource,
   MatOption,
-  MatSnackBar} from "@angular/material";
+  MatSnackBar
+} from "@angular/material";
 import { User } from "src/app/model/user";
 import { UserService } from "src/app/services/user.service";
 import { NgForm } from "@angular/forms";
@@ -101,6 +102,7 @@ export class UserComponent implements OnInit {
   resetForm(form: NgForm) {
     form.reset();
     this.user = new User();
+    this.tabGroup.selectedIndex = this.USER_REGISTERED;
   }
 
   showMessage(data) {

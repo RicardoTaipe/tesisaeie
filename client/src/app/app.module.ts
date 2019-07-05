@@ -27,6 +27,7 @@ import { LockerComponent } from './dashboard/services/locker/locker.component';
 import { AlquilarComponent } from './dashboard/services/alquilar/alquilar.component';
 import { CourseComponent } from './dashboard/courses/course/course.component';
 import { RegisterCourseComponent } from './dashboard/courses/register-course/register-course.component';
+import { AdsComponent } from './dashboard/informative/ads/ads.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { RegisterCourseComponent } from './dashboard/courses/register-course/reg
     LockerComponent,
     AlquilarComponent,
     CourseComponent,
-    RegisterCourseComponent
+    RegisterCourseComponent,
+    AdsComponent
   ],
   imports: [
     BrowserModule,
