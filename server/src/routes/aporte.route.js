@@ -4,7 +4,7 @@ const auth = require("../middleware/auth");
 const aporteController = require("../controllers/aporte.controller");
 
 //Show all aportes
-router.get("/", aporteController.get_all_aportes);
+router.get("/", auth, aporteController.get_all_aportes);
 //Add a new aporte
 router.post("/", auth, aporteController.create_aporte);
 //Show a aporte by Id

@@ -4,11 +4,11 @@ const auth = require("../middleware/auth");
 const CategoryController = require("../controllers/category.controller");
 
 //Show all categories
-router.get("/", CategoryController.get_all_categories);
+router.get("/", auth, CategoryController.get_all_categories);
 //Add a new category
 router.post("/", auth, CategoryController.create_category);
 //Show a category by Id
-router.get("/:categoryId", CategoryController.get_category);
+router.get("/:categoryId", auth, CategoryController.get_category);
 //Update a category by Id
 router.put("/:categoryId", auth, CategoryController.update_category);
 //Delete a category by Id
