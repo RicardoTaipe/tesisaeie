@@ -1,5 +1,6 @@
 const Ads = require("../models/ads.model");
 const mongoose = require("mongoose");
+const fetch = require("node-fetch");
 
 exports.get_all_ads = (req, res, next) => {
   Ads.find()
@@ -18,6 +19,14 @@ exports.get_all_ads = (req, res, next) => {
 };
 
 exports.create_ad = (req, res, next) => {
+  const body = {
+    app_id: "310d4705-1030-4dc5-b7f3-71a924e5bd1f",
+    included_segments: ["All"],
+    data: { adsId: "xxxx" },
+    contents: { en: "Ha añadido una nueva notificaciion" },
+    headings: { en: "AEIE" }
+  };
+
   const ad = new Ads({
     _id: new mongoose.Types.ObjectId(),
     title: req.body.title,
@@ -26,6 +35,14 @@ exports.create_ad = (req, res, next) => {
   });
   ad.save()
     .then(result => {
+      fetch("https://onesignal.com/api/v1/notifications", {
+        method: "post",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Basic ${process.env.ONE_SIGNAL_API_KEY}`
+        }
+      })
       res.status(201).json({
         message: "Created ad succesfully"
       });

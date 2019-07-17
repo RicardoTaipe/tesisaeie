@@ -156,6 +156,7 @@
               [(ngModel)]="product.stock"
               #stock="ngModel"
               type="number"
+              min="1"
               required
             />
             <mat-error [hidden]="stock.valid || stock.pristine"

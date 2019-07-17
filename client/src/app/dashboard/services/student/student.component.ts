@@ -51,7 +51,6 @@ export class StudentComponent implements OnInit {
   }
 
   saveStudent(studentForm: NgForm) {
-    console.log(studentForm.value);
     if (studentForm.form.valid) {
       if (studentForm.value._id == null) {
         this.studentService.addStudent(studentForm.value).subscribe(data => {
@@ -124,7 +123,6 @@ export class StudentComponent implements OnInit {
     this.careerService.getCareers().subscribe(
       res => {
         this.careers = res;
-        console.log(res);
       },
       error => {}
     );
