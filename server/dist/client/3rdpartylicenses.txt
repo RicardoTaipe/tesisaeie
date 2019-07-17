@@ -89,6 +89,8 @@ THE SOFTWARE.
 
 @angular/material/button
 
+@angular/material/card
+
 @angular/material/checkbox
 
 @angular/material/core
@@ -100,6 +102,8 @@ THE SOFTWARE.
 @angular/material/expansion
 
 @angular/material/form-field
+
+@angular/material/grid-list
 
 @angular/material/icon
 

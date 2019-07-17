@@ -28,6 +28,7 @@ import { AlquilarComponent } from './dashboard/services/alquilar/alquilar.compon
 import { CourseComponent } from './dashboard/courses/course/course.component';
 import { RegisterCourseComponent } from './dashboard/courses/register-course/register-course.component';
 import { AdsComponent } from './dashboard/informative/ads/ads.component';
+import { HomescreenComponent } from './dashboard/informative/homescreen/homescreen.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { AdsComponent } from './dashboard/informative/ads/ads.component';
     AlquilarComponent,
     CourseComponent,
     RegisterCourseComponent,
-    AdsComponent
+    AdsComponent,
+    HomescreenComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,11 @@
+.example-card {
+  background-color: blue;
+}
+
+.card-color {
+  background-color: #3f51b5;
+}
+
+mat-card {
+  color: #fafafa;
+}

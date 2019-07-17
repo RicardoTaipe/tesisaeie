@@ -26,16 +26,15 @@ export class LoginComponent implements OnInit {
       res => {
         localStorage.setItem("uid", res.uid);
         localStorage.setItem("token", res.token);
-        this.router.navigate(["/dashboard"]);
+        this.router.navigate(["/dashboard/home"]);
       },
       error => {
         this.showMessage(error.error.message);
-        
       }
     );
   }
 
-  showMessage(message:string){
+  showMessage(message: string) {
     this.snackBar.open(message, "OK", {
       duration: 4000,
       verticalPosition: "top",
