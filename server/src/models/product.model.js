@@ -11,7 +11,8 @@ const productSchema = mongoose.Schema({
     ref: "Category",
     required: true
   },
-  supplier: { type: mongoose.Schema.Types.ObjectId, ref: "Supplier" }
+  supplier: { type: mongoose.Schema.Types.ObjectId, ref: "Supplier" },
+  state: { type: Boolean, default: true }
 });
 
 module.exports = mongoose.model("Product", productSchema);

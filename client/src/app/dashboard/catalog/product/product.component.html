@@ -180,6 +180,7 @@
                 {{ category.name }}
               </mat-option>
             </mat-select>
+            <mat-hint>Campo requerido</mat-hint>
           </mat-form-field>
 
           <mat-form-field>
@@ -189,11 +190,13 @@
               name="supplier"
               [(ngModel)]="product.supplier"
               [(value)]="product.supplier"
+              required
             >
               <mat-option *ngFor="let supplier of suppliers" [value]="supplier">
                 {{ supplier.name }}
               </mat-option>
             </mat-select>
+            <mat-hint>Campo requerido</mat-hint>
           </mat-form-field>
 
           <div>

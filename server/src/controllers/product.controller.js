@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 exports.get_all_products = (req, res, next) => {
   Product.find()
+    .where({ state: true })
     .select("_id name description price stock")
     .populate("category", "_id name description")
     .populate("supplier", "_id name")
@@ -31,7 +32,7 @@ exports.create_product = (req, res, next) => {
     .save()
     .then(result => {
       res.status(201).json({
-        message: "Created product succesfully",
+        message: "Producto creado exitosamente",
         createdProduct: {
           result
         }
@@ -78,7 +79,7 @@ exports.update_product = (req, res, next) => {
     .exec()
     .then(result => {
       res.status(200).json({
-        message: "Product updated"
+        message: "Producto actualizado"
       });
     })
     .catch(err => {
@@ -90,11 +91,11 @@ exports.update_product = (req, res, next) => {
 
 exports.delete_product = (req, res, next) => {
   const id = req.params.productId;
-  Product.deleteOne({ _id: id })
+  Product.updateOne({ _id: id }, { state: false })
     .exec()
     .then(result => {
       res.status(200).json({
-        message: "Product deleted"
+        message: "Producto eliminado"
       });
     })
     .catch(err => {

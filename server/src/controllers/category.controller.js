@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 exports.get_all_categories = (req, res, next) => {
   Category.find()
+    .where({ state: true })
     .select("_id name description")
     .exec()
     .then(docs => {
@@ -25,10 +26,7 @@ exports.create_category = (req, res, next) => {
     .save()
     .then(result => {
       res.status(201).json({
-        message: "Created category succesfully"
-        /*createdCategory: {
-          result
-        }*/
+        message: "Categoria creada exitosamente"
       });
     })
     .catch(err => {
@@ -69,7 +67,7 @@ exports.update_category = (req, res, next) => {
     .exec()
     .then(result => {
       res.status(200).json({
-        message: "Category updated"
+        message: "Categoria actualizada"
       });
     })
     .catch(err => {
@@ -81,11 +79,11 @@ exports.update_category = (req, res, next) => {
 
 exports.delete_category = (req, res, next) => {
   const id = req.params.categoryId;
-  Category.deleteOne({ _id: id })
+  Category.updateOne({ _id: id }, { state: false })
     .exec()
     .then(result => {
       res.status(200).json({
-        message: "Category deleted"
+        message: "Categoria eliminada"
       });
     })
     .catch(err => {

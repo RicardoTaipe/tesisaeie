@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 exports.get_all_suppliers = (req, res, next) => {
   Supplier.find()
+    .where({ state: true })
     .select("_id name phone")
     .exec()
     .then(docs => {
@@ -26,7 +27,7 @@ exports.create_supplier = (req, res, next) => {
     .save()
     .then(result => {
       res.status(201).json({
-        message: "Created supplier succesfully"
+        message: "Proveedor creado existosamente"
       });
     })
     .catch(err => {
@@ -68,7 +69,7 @@ exports.update_supplier = (req, res, next) => {
     .exec()
     .then(result => {
       res.status(200).json({
-        message: "Supplier updated"
+        message: "Proveedor actualizado"
       });
     })
     .catch(err => {
@@ -80,11 +81,11 @@ exports.update_supplier = (req, res, next) => {
 
 exports.delete_supplier = (req, res, next) => {
   const id = req.params.supplierId;
-  Supplier.deleteOne({ _id: id })
+  Supplier.updateOne({ _id: id }, { state: false })
     .exec()
     .then(result => {
       res.status(200).json({
-        message: "Supplier deleted"
+        message: "Proveedor eliminado"
       });
     })
     .catch(err => {
