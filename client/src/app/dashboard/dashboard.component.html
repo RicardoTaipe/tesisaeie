@@ -143,13 +143,12 @@
     </mat-expansion-panel>
 
     <mat-expansion-panel [disabled]="verify()">
-      <mat-expansion-panel-header>
+      <mat-expansion-panel-header [matTooltip]="message">
         <mat-icon>account_circle</mat-icon>USUARIOS
       </mat-expansion-panel-header>
       <mat-nav-list>
         <a
           mat-list-item
-          matTooltip="Info about the action"
           [routerLink]="['/dashboard/users']"
           routerLinkActive="active"
           >Listar Usuarios</a

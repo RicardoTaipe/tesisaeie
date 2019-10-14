@@ -10,6 +10,7 @@ import { User } from "../model/user";
 })
 export class DashboardComponent implements OnInit {
   user: User;
+  message: string;
 
   constructor(public auth: AuthService, private router: Router) {}
 
@@ -36,8 +37,10 @@ export class DashboardComponent implements OnInit {
   verify() {
     const role = localStorage.getItem("role");
     if (role === "admin") {
+      this.message = "";
       return false;
     } else {
+      this.message = "No tiene permiso";
       return true;
     }
   }

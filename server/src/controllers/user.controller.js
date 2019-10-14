@@ -33,7 +33,7 @@ exports.login = (req, res) => {
           return res.status(200).json({
             message: "Auth succesful",
             token: token,
-            uid: user[0]._id,
+            uid: user[0]._id
           });
         }
         return res.status(401).json({
@@ -45,6 +45,7 @@ exports.login = (req, res) => {
 };
 exports.get_all_users = (req, res) => {
   User.find()
+    .where({ state: true })
     .select("-__v")
     .exec()
     .then(docs => {
@@ -87,7 +88,7 @@ exports.create_user = (req, res) => {
               .save()
               .then(result => {
                 res.status(201).json({
-                  message: "User created"
+                  message: "Usuario creado"
                 });
               })
               .catch(err => {
@@ -132,9 +133,8 @@ exports.update_user = (req, res) => {
   User.updateOne({ _id: id }, { $set: updateProps })
     .exec()
     .then(result => {
-      console.log(result);
       res.status(200).json({
-        message: "User updated"
+        message: "Usuario actualizado"
       });
     })
     .catch(err => {
@@ -147,11 +147,11 @@ exports.update_user = (req, res) => {
 
 exports.delete_user = (req, res) => {
   const id = req.params.userId;
-  User.deleteOne({ _id: id })
+  User.updateOne({ _id: id }, { state: false })
     .exec()
     .then(result => {
       res.status(200).json({
-        message: "User deleted"
+        message: "Usuario eliminado"
       });
     })
     .catch(err => {
