@@ -27,8 +27,6 @@ exports.create_sale = async (req, res, next) => {
         mensaje: "No hay productos para guardar"
       });
     }
-    console.log(respuesta);
-
     const sale = new Sale({
       _id: new mongoose.Types.ObjectId(),
       date: req.body.date,
@@ -36,12 +34,12 @@ exports.create_sale = async (req, res, next) => {
       products: respuesta,
       user: req.body.user
     });
-    console.log(sale);
+
     sale
       .save()
       .then(result => {
         res.status(201).json({
-          message: "Created sale succesfully",
+          message: "Venta creada exitosamente",
           createdSale: {
             result
           }
@@ -61,7 +59,7 @@ UpdateStock = async (products, callback) => {
   products.forEach(element => {
     productos_id.push(element.product);
   });
-  console.log(productos_id);
+
   let respuesta = [];
   Product.find({})
     .where("_id")
@@ -73,7 +71,7 @@ UpdateStock = async (products, callback) => {
         if (cantidad <= data[i].stock) {
           cantidad_nueva = data[i].stock - cantidad;
 
-          let modifico = await Product.findByIdAndUpdate(data[i]._id, {
+          let modifico = await Product.findOneAndUpdate(data[i]._id, {
             stock: cantidad_nueva
           });
 
@@ -92,7 +90,7 @@ UpdateStock = async (products, callback) => {
 
 exports.get_sale = (req, res, next) => {
   const id = req.params.saleId;
-  Sale.findById(id)
+  Sale.findOne(id)
     //.select('name price _id')
     .exec()
     .then(doc => {
@@ -138,7 +136,7 @@ exports.update_sale = (req, res, next) => {
 
 exports.delete_sale = (req, res, next) => {
   const id = req.params.saleId;
-  Sale.remove({ _id: id })
+  Sale.deleteOne({ _id: id })
     .exec()
     .then(result => {
       res.status(200).json({
