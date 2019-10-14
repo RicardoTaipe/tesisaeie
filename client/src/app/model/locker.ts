@@ -3,7 +3,7 @@ import { Student } from "./students";
 export class Locker {
   _id: string;
   description: string;
-  state: boolean;
+  free: boolean;
   valor: number;
   student: Student;
   constructor() {

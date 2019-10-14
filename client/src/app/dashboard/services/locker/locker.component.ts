@@ -23,7 +23,7 @@ export class LockerComponent implements OnInit {
   locker: Locker = new Locker();
   displayedColumns: string[] = [
     "description",
-    "state",
+    "free",
     "Actualizar",
     "Eliminar"
   ];

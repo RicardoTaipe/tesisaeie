@@ -4,10 +4,10 @@ const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 exports.get_all_lockers = (req, res, next) => {
-  let state = req.query.state;
-  console.log(state);
-  if (state === "false") {
-    Locker.find({ state: false })
+  let free = req.query.free;
+  console.log(free);
+  if (free === "true") {
+    Locker.find({ free: true, state: true })
       //.select("_id name description")
       .exec()
       .then(docs => {
@@ -20,7 +20,7 @@ exports.get_all_lockers = (req, res, next) => {
       });
   } else {
     Locker.find()
-      //.select("_id name description")
+      .where({ state: true })
       .populate("student")
       .exec()
       .then(docs => {
@@ -38,13 +38,13 @@ exports.create_locker = (req, res, next) => {
   const locker = new Locker({
     _id: new mongoose.Types.ObjectId(),
     description: req.body.description,
-    state: false
+    free: true
   });
   locker
     .save()
     .then(result => {
       res.status(201).json({
-        message: "Created locker succesfully"
+        message: "Casillero creado exitosamente"
       });
     })
     .catch(err => {
@@ -85,7 +85,7 @@ exports.update_locker = (req, res, next) => {
     .exec()
     .then(result => {
       res.status(200).json({
-        message: "locker updated"
+        message: "Casillero actualizado"
       });
     })
     .catch(err => {
@@ -97,11 +97,11 @@ exports.update_locker = (req, res, next) => {
 
 exports.delete_locker = (req, res, next) => {
   const id = req.params.lockerId;
-  Locker.deleteOne({ _id: id })
+  Locker.updateOne({ _id: id }, { state: false })
     .exec()
     .then(result => {
       res.status(200).json({
-        message: "locker deleted"
+        message: "Casillero eliminado"
       });
     })
     .catch(err => {
@@ -123,7 +123,7 @@ exports.alquilar_locker = (req, res, next) => {
     .exec()
     .then(result => {
       res.status(200).json({
-        message: "Locker registered successfully"
+        message: "Alquiler registrado exitosamente"
       });
     })
     .catch(err => {
@@ -142,7 +142,7 @@ exports.terminar_alquiler = (req, res, next) => {
       });
     }
     lock.student = undefined;
-    lock.state = false;
+    lock.free = true;
     lock.valor = undefined;
     lock.save((err, doc) => {
       if (err) {
@@ -151,7 +151,7 @@ exports.terminar_alquiler = (req, res, next) => {
         });
       }
       res.status(200).json({
-        message: "Casillero Libre"
+        message: "El alquiler  ha terminado"
       });
     });
   });
@@ -163,8 +163,7 @@ exports.notify_locker = (req, res, next) => {
     to: email,
     from: "taipericardo@gmail.com",
     subject: "AEIE RETIRO DE PERTENENCIAS PERSONALES",
-    text: `Estimado/a estudiante, por favor acercarse a retirar sus pertenencias personales del casillero ${casillero}
-    en caso de no renovar el alquiler del casillero`
+    text: `Estimado/a estudiante, por favor acercarse a retirar sus pertenencias personales del casillero ${casillero} en caso de no renovar el alquiler del casillero`
     //html: "<strong>and easy to do anywhere, even with Node.js</strong>"
   };
   sgMail

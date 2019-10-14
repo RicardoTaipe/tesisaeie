@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 exports.get_all_semesters = (req, res, next) => {
   Semester.find()
+    .where({ state: true })
     .select("_id name")
     .exec()
     .then(docs => {
@@ -24,7 +25,7 @@ exports.create_semester = (req, res, next) => {
     .save()
     .then(result => {
       res.status(201).json({
-        message: "Created semester succesfully"
+        message: "Semestre creado exitosamente"
       });
     })
     .catch(err => {
@@ -65,7 +66,7 @@ exports.update_semester = (req, res, next) => {
     .exec()
     .then(result => {
       res.status(200).json({
-        message: "semester updated"
+        message: "Semestre actualizado"
       });
     })
     .catch(err => {
@@ -77,11 +78,11 @@ exports.update_semester = (req, res, next) => {
 
 exports.delete_semester = (req, res, next) => {
   const id = req.params.semesterId;
-  Semester.deleteOne({ _id: id })
+  Semester.updateOne({ _id: id }, { state: false })
     .exec()
     .then(result => {
       res.status(200).json({
-        message: "semester deleted"
+        message: "Semestre eliminado"
       });
     })
     .catch(err => {

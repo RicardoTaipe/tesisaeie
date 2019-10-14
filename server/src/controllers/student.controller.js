@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 exports.get_all_students = (req, res, next) => {
   Student.find()
+    .where({ state: true })
     //.select("_id name description price stock")
     .populate("career", "_id name")
     .exec()
@@ -32,7 +33,7 @@ exports.create_student = (req, res, next) => {
     .save()
     .then(result => {
       res.status(201).json({
-        message: "Created student succesfully",
+        message: "Estudiante creado exitosamente",
         createdstudent: {
           result
         }
@@ -83,7 +84,7 @@ exports.update_student = (req, res, next) => {
     .exec()
     .then(result => {
       res.status(200).json({
-        message: "student updated"
+        message: "Estudiante actualizado"
       });
     })
     .catch(err => {
@@ -96,11 +97,11 @@ exports.update_student = (req, res, next) => {
 
 exports.delete_student = (req, res, next) => {
   const id = req.params.studentId;
-  Student.deleteOne({ _id: id })
+  Student.updateOne({ _id: id }, { state: false })
     .exec()
     .then(result => {
       res.status(200).json({
-        message: "student deleted"
+        message: "Estudiante eliminado"
       });
     })
     .catch(err => {

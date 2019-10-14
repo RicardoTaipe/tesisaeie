@@ -22,10 +22,10 @@ export class AlquilarComponent implements OnInit {
   @ViewChild("stepper") stepper: MatHorizontalStepper;
 
   locker: Locker = new Locker();
-  displayedColumns: string[] = ["description", "state", "Seleccionar"];
+  displayedColumns: string[] = ["description", "free", "Seleccionar"];
   displayedColumnsAlquiler: string[] = [
     "casillero",
-    "estado",
+    "free",
     "nombres",
     "apellidos",
     "notificar",
@@ -61,7 +61,7 @@ export class AlquilarComponent implements OnInit {
 
   getLockersNotFree() {
     this.lockerService.getLockers().subscribe(res => {
-      this.dataSourceAlquiler.data = res.filter(locker => locker.state == true);
+      this.dataSourceAlquiler.data = res.filter(locker => locker.free == false);
       this.dataSourceAlquiler.paginator = this.paginator;
     });
   }
@@ -79,7 +79,7 @@ export class AlquilarComponent implements OnInit {
     this.stepper.reset();
     this.stepper.steps.first.select();
     this.locker.student = new Student();
-    this.locker.state = false;
+    this.locker.free = true;
   }
 
   selectLocker(lockerSelected: Locker) {
@@ -92,7 +92,7 @@ export class AlquilarComponent implements OnInit {
       this.showMessage({ message: "Debe seleccionar un casillero primero" });
       this.stepper.previous();
     } else {
-      this.locker.state = true;
+      this.locker.free = false;
       this.locker.student = studentSelected;
       this.stepper.next();
     }
@@ -118,12 +118,11 @@ export class AlquilarComponent implements OnInit {
     }
   }
 
-  notificar(locker:Locker){
-    console.log(locker)
-    this.lockerService.notify(locker).subscribe(res=>{
+  notificar(locker: Locker) {
+    console.log(locker);
+    this.lockerService.notify(locker).subscribe(res => {
       this.showMessage(res);
     });
-    
   }
 
   terminarAlquiler(lockerSelected: Locker) {

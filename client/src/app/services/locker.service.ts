@@ -15,7 +15,7 @@ export class LockerService {
     return this.http.get<Locker[]>(this.URL_API);
   }
   getFreeLockers() {
-    return this.http.get<Locker[]>(this.URL_API + "/?state=false");
+    return this.http.get<Locker[]>(this.URL_API + "/?free=true");
   }
 
   addLocker(locker: Locker) {

@@ -132,7 +132,8 @@
               placeholder="Buscar Estudiante"
               [(ngModel)]="aporte.student._id"
               required
-              [readonly]=true
+              [readonly]="true"
+              matTooltip="De click en el icono de la derecha"
             />
             <mat-hint>{{ showFullName | uppercase }}</mat-hint>
             <button
@@ -172,7 +173,7 @@
               #description="ngModel"
             />
           </mat-form-field>
-
+          <!---->
           <mat-form-field>
             <input
               matInput
@@ -183,10 +184,6 @@
               type="datetime"
               [readonly]="true"
             />
-            <!--
-            <mat-error [hidden]="date.valid || date.pristine"
-              >Campo requerido</mat-error
-            >-->
           </mat-form-field>
 
           <div>

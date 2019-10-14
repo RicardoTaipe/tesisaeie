@@ -20,11 +20,11 @@
             </td>
           </ng-container>
 
-          <!-- state Column -->
-          <ng-container matColumnDef="state">
+          <!-- free Column -->
+          <ng-container matColumnDef="free">
             <th mat-header-cell *matHeaderCellDef>Estado Casillero</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.state ? "OCUPADO" : "LIBRE" }}
+              {{ element.free ? "LIBRE" : "OCUPADO" }}
             </td>
           </ng-container>
 

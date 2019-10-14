@@ -8,7 +8,8 @@ const studentSchema = mongoose.Schema({
   cedula: { type: String, required: true },
   numero_unico: { type: String, required: true },
   email: { type: String, required: true },
-  phone: { type: String }
+  phone: { type: String },
+  state: { type: Boolean, default: true }
 });
 
 module.exports = mongoose.model("Student", studentSchema);

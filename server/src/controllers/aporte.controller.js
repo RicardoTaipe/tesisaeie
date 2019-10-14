@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 exports.get_all_aportes = (req, res, next) => {
   Aporte.find()
+    .where({ state: true })
     //.select("_id name description")
     .populate("student")
     .populate("semester")
@@ -30,7 +31,7 @@ exports.create_aporte = (req, res, next) => {
     .save()
     .then(result => {
       res.status(201).json({
-        message: "Created aporte succesfully"
+        message: "Aporte creado exitosamente"
       });
     })
     .catch(err => {
@@ -71,7 +72,7 @@ exports.update_aporte = (req, res, next) => {
     .exec()
     .then(result => {
       res.status(200).json({
-        message: "aporte updated"
+        message: "Aporte actualizado"
       });
     })
     .catch(err => {
@@ -83,11 +84,11 @@ exports.update_aporte = (req, res, next) => {
 
 exports.delete_aporte = (req, res, next) => {
   const id = req.params.aporteId;
-  Aporte.deleteOne({ _id: id })
+  Aporte.updateOne({ _id: id }, { state: false })
     .exec()
     .then(result => {
       res.status(200).json({
-        message: "aporte deleted"
+        message: "Aporte eliminado"
       });
     })
     .catch(err => {

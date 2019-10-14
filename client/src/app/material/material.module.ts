@@ -20,7 +20,8 @@ import {
   MatStepperModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatGridListModule
+  MatGridListModule,
+  MatTooltipModule
 } from "@angular/material";
 
 const MaterialComponents = [
@@ -44,7 +45,8 @@ const MaterialComponents = [
   MatStepperModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatGridListModule
+  MatGridListModule,
+  MatTooltipModule
 ];
 
 @NgModule({

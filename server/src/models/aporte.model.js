@@ -6,7 +6,8 @@ const aporteSchema = mongoose.Schema({
   description: { type: String },
   date: { type: Date, required: true },
   semester: { type: mongoose.Schema.Types.ObjectId, ref: "Semester" },
-  student: { type: mongoose.Schema.Types.ObjectId, ref: "Student" }
+  student: { type: mongoose.Schema.Types.ObjectId, ref: "Student" },
+  state: { type: Boolean, default: true }
 });
 
 module.exports = mongoose.model("Aporte", aporteSchema);
