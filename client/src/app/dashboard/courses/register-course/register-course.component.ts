@@ -110,16 +110,27 @@ export class RegisterCourseComponent implements OnInit {
         this.resetStepper();
         return;
       }
-      this.course.students.push(this.student);
-      console.log(this.course);
-      this.courseService.updateCourse(this.course._id, this.course).subscribe(
-        res => {
-          this.showMessage(res);
-          this.getCourses();
-          this.resetStepper();
-        },
-        err => {}
-      );
+      if (this.course.places > 0) {
+        this.course.students.push(this.student);
+        this.course.places -= 1;
+        console.log(this.course);
+        this.courseService.updateCourse(this.course._id, this.course).subscribe(
+          res => {
+            this.showMessage({
+              message: "Estudiante registrado"
+            });
+            this.getCourses();
+            this.resetStepper();
+          },
+          err => {}
+        );
+      } else {
+        this.showMessage({
+          message: "Ya no hay cupos disponibles"
+        });
+        this.resetStepper();
+        return;
+      }
     }
   }
 

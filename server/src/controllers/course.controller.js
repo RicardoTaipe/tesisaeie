@@ -4,7 +4,8 @@ const mongoose = require("mongoose");
 exports.get_all_courses = (req, res, next) => {
   Course.find()
     //.select("_id name description")
-    .populate('semester')
+    .where({ state: true })
+    .populate("semester")
     .populate("students")
     .exec()
     .then(docs => {
@@ -22,18 +23,17 @@ exports.create_course = (req, res, next) => {
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
     description: req.body.description,
-    //content: req.body.content,
     date: req.body.date,
-    price:req.body.price,
+    price: req.body.price,
     places: req.body.places,
-    semester: req.body.semester,
+    semester: req.body.semester
     //students: req.body.students
   });
   course
     .save()
     .then(result => {
       res.status(201).json({
-        message: "Created course succesfully"
+        message: "Curso creado exitosamente"
       });
     })
     .catch(err => {
@@ -74,7 +74,7 @@ exports.update_course = (req, res, next) => {
     .exec()
     .then(result => {
       res.status(200).json({
-        message: "course updated"
+        message: "Curso actualizado"
       });
     })
     .catch(err => {
@@ -86,11 +86,11 @@ exports.update_course = (req, res, next) => {
 
 exports.delete_course = (req, res, next) => {
   const id = req.params.courseId;
-  Course.deleteOne({ _id: id })
+  Course.updateOne({ _id: id }, { state: false })
     .exec()
     .then(result => {
       res.status(200).json({
-        message: "course deleted"
+        message: "Curso eliminado"
       });
     })
     .catch(err => {
