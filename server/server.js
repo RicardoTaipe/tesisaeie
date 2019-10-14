@@ -11,7 +11,7 @@ require("./database");
 
 //Settings Express app
 //proces.env.port is a suggested when the app is deployed to cloud
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT || 80);
 
 //Middleware
 //Is not required to install body-parser in the current node version
