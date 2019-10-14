@@ -44,7 +44,7 @@ exports.create_ad = (req, res, next) => {
         }
       });
       res.status(201).json({
-        message: "Created ad succesfully"
+        message: "Anuncio publicado"
       });
     })
     .catch(err => {
@@ -91,7 +91,7 @@ exports.update_ad = (req, res, next) => {
     .then(result => {
       console.log(result);
       res.status(200).json({
-        message: "Ad updated"
+        message: "Anuncio actualizado"
       });
     })
     .catch(err => {
@@ -108,7 +108,7 @@ exports.delete_ad = (req, res, next) => {
     .exec()
     .then(result => {
       res.status(200).json({
-        message: "Ad deleted"
+        message: "Anuncio eliminado"
       });
     })
     .catch(err => {
