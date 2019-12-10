@@ -41,6 +41,8 @@ export class CategoryComponent implements OnInit {
           this.showMessage(data);
           this.resetForm(categoryForm);
           this.tabGroup.selectedIndex = this.CATEGORIAS_REGISTRADAS;
+        }, err=>{
+          this.showMessage({"message":"Se produjo un error. Intentelo nuevamente"});
         });
       } else {
         this.categoryService

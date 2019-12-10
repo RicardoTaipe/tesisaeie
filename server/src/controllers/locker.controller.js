@@ -161,7 +161,7 @@ exports.notify_locker = (req, res, next) => {
   const { email, casillero } = req.body;
   const msg = {
     to: email,
-    from: "taipericardo@gmail.com",
+    from: "asoelectronica.epn@gmail.com",
     subject: "AEIE RETIRO DE PERTENENCIAS PERSONALES",
     text: `Estimado/a estudiante, por favor acercarse a retirar sus pertenencias personales del casillero ${casillero} en caso de no renovar el alquiler del casillero`
     //html: "<strong>and easy to do anywhere, even with Node.js</strong>"
